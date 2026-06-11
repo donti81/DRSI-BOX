@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Starterkit.Pages.Layouts
+namespace DRSIBOX.Pages.Layouts
 {
     public class PreloaderModel : PageModel
     {

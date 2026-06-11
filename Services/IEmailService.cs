@@ -1,4 +1,4 @@
-namespace Starterkit.Services
+﻿namespace DRSIBOX.Services
 {
     public interface IEmailService
     {

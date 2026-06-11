@@ -1,12 +1,12 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Starterkit.Models;
-using Starterkit.Services;
+using DRSIBOX.Models;
+using DRSIBOX.Services;
 using System.IO.Compression;
 using System.Text.Json;
 
-namespace Starterkit.Pages.Dl
+namespace DRSIBOX.Pages.Dl
 {
     [AllowAnonymous]
     public class IndexModel : PageModel

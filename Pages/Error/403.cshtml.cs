@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Starterkit.Pages.Error
+namespace DRSIBOX.Pages.Error
 {
     public class Error403Model : PageModel
     {

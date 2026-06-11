@@ -1,12 +1,12 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Starterkit.Data;
-using Starterkit.Models;
+using DRSIBOX.Data;
+using DRSIBOX.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Starterkit.Pages.Admin.Users
+namespace DRSIBOX.Pages.Admin.Users
 {
     public class IndexModel : PageModel
     {

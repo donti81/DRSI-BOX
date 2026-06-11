@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Starterkit.Pages.Auth
+namespace DRSIBOX.Pages.Auth
 {
     public class SignUpModel : PageModel
     {

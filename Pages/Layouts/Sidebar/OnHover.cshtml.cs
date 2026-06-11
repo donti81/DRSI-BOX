@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Starterkit.Pages.Layouts.Sidebar
+namespace DRSIBOX.Pages.Layouts.Sidebar
 {
     public class OnHoverModel : PageModel
     {

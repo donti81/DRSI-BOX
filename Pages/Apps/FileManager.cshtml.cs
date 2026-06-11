@@ -1,14 +1,14 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Starterkit.Models;
-using Starterkit.Services;
+using DRSIBOX.Models;
+using DRSIBOX.Services;
 using System.IO.Compression;
 using System.Security.Claims;
 using System.Text.Json;
 
-namespace Starterkit.Pages.Apps
+namespace DRSIBOX.Pages.Apps
 {
     public class FileManagerModel : PageModel
     {

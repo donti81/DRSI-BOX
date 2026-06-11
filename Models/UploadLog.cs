@@ -1,4 +1,4 @@
-namespace Starterkit.Models
+﻿namespace DRSIBOX.Models
 {
     public class UploadLog
     {

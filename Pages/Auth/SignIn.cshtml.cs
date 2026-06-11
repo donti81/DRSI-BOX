@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Starterkit.Models;
+using DRSIBOX.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Starterkit.Pages.Auth
+namespace DRSIBOX.Pages.Auth
 {
     public class SignInModel : PageModel
     {

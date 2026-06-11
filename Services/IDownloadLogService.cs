@@ -1,6 +1,6 @@
-using Starterkit.Models;
+﻿using DRSIBOX.Models;
 
-namespace Starterkit.Services
+namespace DRSIBOX.Services
 {
     public interface IDownloadLogService
     {

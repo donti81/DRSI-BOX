@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Starterkit.Models;
+using DRSIBOX.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Paces.Pages.Apps.Users

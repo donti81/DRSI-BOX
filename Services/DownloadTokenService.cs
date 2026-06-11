@@ -1,9 +1,9 @@
-using Oracle.ManagedDataAccess.Client;
+﻿using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
-using Starterkit.Models;
+using DRSIBOX.Models;
 using System.Security.Cryptography;
 
-namespace Starterkit.Services
+namespace DRSIBOX.Services
 {
     public class DownloadTokenService : IDownloadTokenService
     {

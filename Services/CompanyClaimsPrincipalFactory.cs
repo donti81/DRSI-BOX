@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using Starterkit.Models;
+using DRSIBOX.Models;
 using System.Security.Claims;
 
-namespace Starterkit.Services
+namespace DRSIBOX.Services
 {
     public class CompanyClaimsPrincipalFactory : UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>
     {

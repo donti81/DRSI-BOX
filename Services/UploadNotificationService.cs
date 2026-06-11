@@ -1,8 +1,8 @@
-using Oracle.ManagedDataAccess.Client;
+﻿using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
-using Starterkit.Models;
+using DRSIBOX.Models;
 
-namespace Starterkit.Services
+namespace DRSIBOX.Services
 {
     public class UploadNotificationService : IUploadNotificationService
     {

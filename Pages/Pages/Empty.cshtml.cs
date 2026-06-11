@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Starterkit.Pages.Pages
+namespace DRSIBOX.Pages.Pages
 {
     public class EmptyModel : PageModel
     {

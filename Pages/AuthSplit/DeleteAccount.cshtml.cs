@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Starterkit.Pages.Authsplit
+namespace DRSIBOX.Pages.Authsplit
 {
     public class DeleteAccountModel : PageModel
     {

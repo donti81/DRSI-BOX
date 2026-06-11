@@ -1,7 +1,7 @@
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
 
-namespace Starterkit.Services
+namespace DRSIBOX.Services
 {
     public class EmailService : IEmailService
     {

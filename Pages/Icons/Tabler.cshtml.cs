@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Starterkit.Pages.Icons
+namespace DRSIBOX.Pages.Icons
 {
     public class TablerModel : PageModel
     {

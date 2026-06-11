@@ -1,0 +1,17 @@
+﻿{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"d:\\\\Source\\\\DRSIBOX\" -Force)",
+      "Bash(Select-Object Name, Mode)",
+      "PowerShell(Get-Command node -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command npm -ErrorAction SilentlyContinue)",
+      "PowerShell($env:PATH)",
+      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\nodejs\" -ErrorAction SilentlyContinue; Get-ChildItem \"C:\\\\Program Files \\(x86\\)\\\\nodejs\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:APPDATA\\\\npm\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:LOCALAPPDATA\\\\nvm\" -ErrorAction SilentlyContinue)",
+      "PowerShell(head -30)",
+      "PowerShell(winget --version 2>&1)",
+      "PowerShell(Get-Process -Name \"DRSIBOX\" -ErrorAction SilentlyContinue | Stop-Process -Force; Start-Sleep -Milliseconds 500; Set-Location \"d:\\\\Source\\\\DRSIBOX\"; dotnet build 2>&1 | Where-Object { $_ -match \"error CS|Build succeeded|Error\\\\\\(s\\\\\\)\" })",
+      "PowerShell(Stop-Process -Name DRSIBOX -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Name dotnet -Force -ErrorAction SilentlyContinue)"
+    ]
+  }
+}

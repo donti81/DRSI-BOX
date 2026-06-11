@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Starterkit.Pages.Authcard
+namespace DRSIBOX.Pages.Authcard
 {
     public class LockScreenModel : PageModel
     {

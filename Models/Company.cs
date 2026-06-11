@@ -1,6 +1,6 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Starterkit.Models
+namespace DRSIBOX.Models
 {
     public class Company
     {

@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Starterkit.Models;
+using DRSIBOX.Models;
 
-namespace Starterkit.Pages.Auth
+namespace DRSIBOX.Pages.Auth
 {
     public class SignOutModel : PageModel
     {

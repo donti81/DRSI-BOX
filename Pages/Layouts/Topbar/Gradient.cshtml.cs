@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Starterkit.Pages.Layouts.Topbar
+namespace DRSIBOX.Pages.Layouts.Topbar
 {
     public class GradientModel : PageModel
     {

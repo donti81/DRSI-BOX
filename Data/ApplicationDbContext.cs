@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Starterkit.Models;
+using DRSIBOX.Models;
 
-namespace Starterkit.Data
+namespace DRSIBOX.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

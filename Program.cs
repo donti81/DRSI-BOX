@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using Starterkit.Data;
-using Starterkit.Models;
-using Starterkit.Services;
+using DRSIBOX.Data;
+using DRSIBOX.Models;
+using DRSIBOX.Services;
 using tusdotnet;
 using tusdotnet.Models;
 using tusdotnet.Models.Configuration;

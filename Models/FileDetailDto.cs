@@ -1,6 +1,6 @@
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace Starterkit.Models
+namespace DRSIBOX.Models
 {
     internal record FileDetailDto(
         [property: JsonPropertyName("id")]   long?  Id,
