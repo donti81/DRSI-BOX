@@ -1,0 +1,216 @@
+@page "/apps/users/role-details"
+@model Paces.Pages.Apps.Users.RoleDetailsModel
+
+
+@{
+    ViewBag.title = "Role Details";
+    ViewBag.subtitle = "Pages";
+}
+
+
+@section Styles {
+
+}
+
+
+<div class="wrapper">
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Topbar.cshtml")
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Sidenav.cshtml")
+
+        <!-- Start Page Content here -->
+<div class="page-content">
+<main>
+<div class="container-fluid">
+<div class="flex flex-wrap justify-between items-center gap-3 my-5">
+<div>
+<h4 class="page-main-title mb-1.25">Role Details — @Model.RoleName</h4>
+<p class="text-default-400">Upravljanje vloge in njenih uporabnikov.</p>
+</div>
+<div>
+<a class="btn bg-light hover:text-primary" href="/apps/users/roles">
+<i class="iconify tabler--arrow-left"></i> Nazaj
+</a>
+</div>
+</div>
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+<div class="alert alert-success mb-4">@Model.StatusMessage</div>
+}
+<div class="grid lg:grid-cols-4 grid-cols-1 gap-base">
+<div class="col-span-1">
+<div class="card">
+<div class="absolute top-0 end-0 size-45">
+<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+</div>
+<div class="card-body">
+<div class="flex items-start mb-7.5">
+<div>
+<div class="size-12 bg-primary/15 text-primary flex justify-center items-center rounded-md">
+<i class="iconify tabler--shield-lock text-2xl"></i>
+</div>
+</div>
+<div class="ms-6">
+<h5 class="text-sm mb-1.25">@Model.RoleName</h5>
+<p class="text-default-400">Sistemska vloga.</p>
+</div>
+</div>
+<p class="text-sm text-default-400 mb-3">Skupaj @Model.RoleUsers.Count uporabnikov</p>
+<div class="flex justify-between">
+<span class="flex items-center gap-1.5 text-default-400 text-xs">
+<i class="iconify tabler--users"></i>
+@Model.RoleUsers.Count
+</span>
+<div>
+<button aria-expanded="false" aria-haspopup="dialog" class="btn btn-sm border border-success text-success hover:bg-success hover:text-white rounded-full" data-hs-overlay="#addUserModal" type="button">+ Dodaj</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-3">
+<div class="card" data-table="" data-table-rows-per-page="8">
+<div class="card-header">
+<div class="flex gap-2">
+<div class="input-icon-group">
+<i class="iconify tabler--search input-icon"></i>
+<input class="form-input" data-table-search="" placeholder="Search Users..." type="search"/>
+</div>
+<button class="hidden btn bg-danger text-white hover:bg-danger-hover" data-table-delete-selected="">Delete</button>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<div class="md:flex items-center gap-3">
+<span class="me-3 font-semibold text-nowrap">Filter By:</span>
+<!-- Status Filter -->
+<div class="input-icon-group">
+<i class="iconify tabler--user-check input-icon"></i>
+<select class="form-select" data-table-filter="status">
+<option value="">Status</option>
+<option value="Active">Active</option>
+<option value="Inactive">Inactive</option>
+<option value="Suspended">Suspended</option>
+</select>
+</div>
+</div>
+<!-- Records Per Page -->
+<div>
+<select class="form-select" data-table-set-rows-per-page="">
+<option value="5">5</option>
+<option value="8">8</option>
+<option value="10">10</option>
+<option value="15">15</option>
+<option value="20">20</option>
+</select>
+</div>
+<button aria-expanded="false" aria-haspopup="dialog" class="btn bg-secondary text-white hover:bg-secondary-hover" data-hs-overlay="#addUserModal" type="button">Dodaj uporabnika</button>
+</div>
+</div>
+<div class="table-wrapper">
+<table class="table table-hover">
+<thead class="thead-sm">
+<tr class="bg-light/25 text-2xs uppercase">
+<th class="w-[1%]">
+<input class="form-checkbox form-checkbox-light size-4.5" data-table-select-all="" id="select-all-products" type="checkbox"/>
+</th>
+<th data-table-sort="">ID</th>
+<th data-table-sort="user">User</th>
+<th data-table-sort="">Joined Date</th>
+<th data-column="status" data-table-sort="">Status</th>
+<th class="text-center">Actions</th>
+</tr>
+</thead>
+<tbody>
+@foreach (var user in Model.RoleUsers)
+{
+<tr>
+<td><input class="form-checkbox form-checkbox-light size-4.5" type="checkbox" value="option"/></td>
+<td><h5><a class="text-sm font-semibold hover:text-primary" href="/#!">@user.Id[..8].ToUpper()</a></h5></td>
+<td>
+<div class="flex gap-3 items-center">
+<div class="bg-primary/15 text-primary flex size-8 items-center justify-center rounded-full text-xs font-bold">
+@((user.FullName ?? user.Email ?? "?")[..1].ToUpper())
+</div>
+<div>
+<h5><a class="hover:text-primary" href="/#!">@(user.FullName ?? user.Email)</a></h5>
+<p class="text-default-400 text-xs">@user.Email</p>
+</div>
+</div>
+</td>
+<td>—</td>
+<td data-column="status"><span class="badge badge-label bg-success/15 text-success">Active</span></td>
+<td>
+<div class="flex justify-center gap-1.5">
+<form method="post" asp-page-handler="RemoveUser" style="display:inline">
+@Html.AntiForgeryToken()
+<input type="hidden" name="RemoveUserId" value="@user.Id"/>
+<input type="hidden" name="CurrentRole" value="@Model.RoleName"/>
+<button class="btn btn-icon btn-sm border border-danger text-danger hover:bg-danger hover:text-white" type="submit" title="Odstrani iz vloge">
+<i class="iconify tabler--trash text-base"></i>
+</button>
+</form>
+</div>
+</td>
+</tr>
+}
+</tbody>
+</table>
+</div>
+<div class="card-footer">
+<div data-table-pagination-info="roles"></div>
+<div data-table-pagination=""></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+            @await Html.PartialAsync("~/Pages/Shared/Partials/_Footer.cshtml")
+
+            <div aria-labelledby="addUserModalLabel" class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none" id="addUserModal" role="dialog" tabindex="-1">
+<div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 scale-95 opacity-0 ease-in-out transition-all duration-200 md:max-w-lg md:w-full m-3 md:mx-auto flex items-center">
+<div class="w-full flex flex-col card pointer-events-auto">
+<div class="card-header p-5">
+<h3 class="text-sm" id="addUserModalLabel">Dodaj uporabnika v vlogo @Model.RoleName</h3>
+<button aria-label="Close" data-hs-overlay="#addUserModal" type="button">
+<i class="iconify tabler--x text-xl"></i>
+</button>
+</div>
+<form method="post" asp-page-handler="AddUser">
+@Html.AntiForgeryToken()
+<input type="hidden" name="CurrentRole" value="@Model.RoleName"/>
+<div class="card-body">
+<div>
+<label class="form-label">Uporabnik</label>
+<select class="form-select" name="AddUserId" required="">
+<option value="">— izberi —</option>
+@foreach (var u in Model.AvailableUsers)
+{
+<option value="@u.Id">@(u.FullName ?? u.Email) (@u.Email)</option>
+}
+</select>
+</div>
+</div>
+<div class="flex justify-end items-center gap-x-2 p-5 border-t border-default-300">
+<button class="btn bg-light hover:text-primary" data-hs-overlay="#addUserModal" type="button">Prekliči</button>
+<button class="btn bg-primary text-white hover:bg-primary-hover" type="submit">Dodaj</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- End Page content -->
+</div>
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_FooterScripts.cshtml")
+
+    <!-- Custom table -->
+
+
+
+@section Scripts {
+<script src="/js/pages/custom-table.js"></script>
+}

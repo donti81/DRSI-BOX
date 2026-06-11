@@ -1,0 +1,89 @@
+@page "/auth-card/lock-screen"
+@model Starterkit.Pages.Authcard.LockScreenModel
+
+
+@{
+    ViewBag.title = "Lock Screen";
+}
+
+
+@section Styles {
+
+}
+
+
+<!-- Start Page Content here -->
+<div class="flex min-h-screen items-center p-12.5">
+<div class="container">
+<div class="flex justify-center">
+<div class="xl:w-5/6">
+<div class="absolute end-0 top-0">
+<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+</div>
+<div class="absolute start-0 bottom-0 rotate-180">
+<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+</div>
+<div class="card rounded-2xl">
+<div class="grid grid-cols-1 lg:grid-cols-2">
+<div class="card-body relative p-12.5">
+<!-- Auth Brand Logo -->
+<div class="mb-7.5 flex flex-col items-center justify-center text-center">
+<a class="auth-logo" href="/">
+<img alt="logo" class="flex dark:hidden" src="/images/logo-black.png"/>
+<img alt="dark logo" class="hidden dark:flex" src="/images/logo.png"/>
+</a>
+<h4 class="text-default-900 mt-7.5 mb-2 text-base font-bold">Lock Screen!</h4>
+<p class="text-default-400 mx-auto w-full lg:w-3/4">This screen is locked. Enter your password to continue.</p>
+</div>
+<form action="index.html">
+<div class="mb-9 text-center">
+<div class="border-default-300 mx-auto mb-3 size-20 rounded-full border-4">
+<img alt="thumbnail" class="size-18 rounded-full" src="/images/users/user-1.jpg"/>
+</div>
+<h5 class="text-base font-semibold">David Dev</h5>
+</div>
+<div class="mb-5">
+<label class="form-label" for="userPassword">
+                                            Password
+                                            <span class="text-danger">*</span>
+</label>
+<div class="input-icon-group">
+<i class="iconify tabler--lock-password input-icon"></i>
+<input class="form-input" id="userPassword" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<div>
+<button class="btn bg-primary w-full py-3 font-semibold text-white hover:bg-primary-hover" type="submit">Unlock</button>
+</div>
+</form>
+<p class="text-default-400 mt-7.5 text-center">
+                                    Not you? Return to
+                                    <a class="text-primary font-semibol underline underline-offset-3" href="/auth-card/sign-in">Sign in</a>
+</p>
+<!-- Auth Footer -->
+<p class="text-default-400 mt-7.5 text-center">
+                                    ©
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script>
+                                    Paces - by
+                                    <span>Coderthemes</span>
+</p>
+</div>
+<div class="relative hidden h-full overflow-hidden rounded-e-2xl bg-cover bg-center object-cover lg:block" style='background-image: url(/images/auth.jpg)'>
+<div class="absolute inset-0 flex items-end justify-center rounded-e-sm p-9 [background:linear-gradient(to_top,#313a46,rgba(49,58,70,.8),rgba(49,58,70,.5))]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End Page content -->
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+
+@section Scripts {
+
+}

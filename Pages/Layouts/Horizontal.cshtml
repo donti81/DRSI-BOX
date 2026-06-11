@@ -1,0 +1,53 @@
+@page "/layouts/horizontal"
+@model Starterkit.Pages.Layouts.HorizontalModel
+
+
+@{
+    ViewBag.title = "Horizontal";
+    ViewBag.subtitle = "Layouts";
+    ViewBag.HTMLAttributes = "data-layout=horizontal";
+}
+
+
+@section Styles {
+
+}
+
+
+<div class="wrapper">
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Topbar.cshtml")
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_HorizontalNav.cshtml")
+
+        <!-- Start Page Content here -->
+<div class="page-content">
+<main>
+<div class="container-fluid">
+                    @await Html.PartialAsync("~/Pages/Shared/Partials/_PageTitle.cshtml")
+
+                    <div class="card">
+<div class="card-body text-center">
+<h4 class="text-lg">Your custom content here</h4>
+</div>
+<!-- end card-body-->
+</div>
+<!-- end card -->
+</div>
+</main>
+
+            @await Html.PartialAsync("~/Pages/Shared/Partials/_Footer.cshtml")
+
+        </div>
+<!-- End Page content -->
+</div>
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_FooterScripts.cshtml")
+
+
+
+@section Scripts {
+
+}

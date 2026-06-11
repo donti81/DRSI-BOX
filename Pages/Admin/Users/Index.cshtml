@@ -1,0 +1,468 @@
+@page "/admin/users"
+@model Starterkit.Pages.Admin.Users.IndexModel
+
+@{
+    ViewBag.title = "Upravljanje uporabnikov";
+    ViewBag.subtitle = "Admin";
+}
+
+<div class="wrapper">
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Topbar.cshtml")
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Sidenav.cshtml")
+
+    <div class="page-content">
+        <main>
+            <div class="mt-5"></div>
+            <div class="container-fluid">
+
+                <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                        <h4 class="page-main-title mb-1.25">Upravljanje uporabnikov</h4>
+                        <p class="text-default-400">Dodelite podjetje vsakemu uporabniku.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="btn bg-success text-white hover:bg-success-hover"
+                                data-hs-overlay="#addUserModal"
+                                aria-haspopup="dialog" aria-expanded="false">
+                            <i class="iconify tabler--user-plus me-1"></i>
+                            Dodaj uporabnika
+                        </button>
+                        <button class="btn bg-primary text-white hover:bg-primary-hover"
+                                data-hs-overlay="#addCompanyModal"
+                                aria-haspopup="dialog" aria-expanded="false">
+                            <i class="iconify tabler--building-plus me-1"></i>
+                            Dodaj podjetje
+                        </button>
+                    </div>
+                </div>
+
+                @if (Model.StatusMessage is not null)
+                {
+                    <div class="alert alert-success mb-4">
+                        <i class="iconify tabler--circle-check me-2"></i>@Model.StatusMessage
+                    </div>
+                }
+
+                <!-- Users table -->
+                <div class="card">
+                    <div class="card-header flex items-center justify-between gap-3">
+                        <h5 class="text-sm font-semibold">Uporabniki (<span id="userCount">@Model.Users.Count</span>)</h5>
+                        <div class="input-icon-group w-64">
+                            <i class="iconify tabler--search input-icon"></i>
+                            <input class="form-input" id="userSearch" placeholder="Išči uporabnike..." type="search" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="card-header border-t flex items-center justify-between gap-3 py-2">
+                        <div class="flex items-center gap-2 text-sm text-default-500">
+                            Prikaži
+                            <select id="userPageSize" class="form-select form-select-sm w-16">
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                            na stran
+                        </div>
+                        <span id="userCountInfo" class="text-sm text-default-500"></span>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="table table-hover" id="usersTable">
+                            <thead class="thead-sm">
+                                <tr class="bg-light/25 text-2xs uppercase">
+                                    <th>Uporabnik</th>
+                                    <th>Vloga</th>
+                                    <th>Podjetje</th>
+                                    <th class="text-center">Akcije</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var user in Model.Users)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                <h5 class="mb-0.5">@(user.FullName ?? user.Email)</h5>
+                                                <p class="text-default-400 text-xs">@user.Email</p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @{ var userRole = Model.UserRoles.TryGetValue(user.Id, out var r) ? r : ""; }
+                                            @if (!string.IsNullOrEmpty(userRole))
+                                            {
+                                                <span class="badge badge-label bg-warning/15 text-warning">@userRole</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-default-400 text-xs">—</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (user.Company is not null)
+                                            {
+                                                <span class="badge badge-label bg-primary/15 text-primary">@user.Company.Name</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-default-400 text-xs">— ni določeno —</span>
+                                            }
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="flex justify-center gap-1">
+                                                <button class="btn btn-icon btn-sm border border-default-300 hover:border-default-400"
+                                                        title="Dodeli podjetje"
+                                                        data-hs-overlay="#assignCompanyModal"
+                                                        aria-haspopup="dialog" aria-expanded="false"
+                                                        data-user-id="@user.Id"
+                                                        data-user-name="@(user.FullName ?? user.Email)"
+                                                        data-company-id="@(user.CompanyId?.ToString() ?? "")">
+                                                    <i class="iconify tabler--building text-base"></i>
+                                                </button>
+                                                <button class="btn btn-icon btn-sm border border-default-300 hover:border-default-400"
+                                                        title="Dodeli vlogo"
+                                                        data-hs-overlay="#assignRoleModal"
+                                                        aria-haspopup="dialog" aria-expanded="false"
+                                                        data-user-id="@user.Id"
+                                                        data-user-name="@(user.FullName ?? user.Email)"
+                                                        data-user-role="@userRole">
+                                                    <i class="iconify tabler--shield text-base"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer flex items-center justify-between gap-3">
+                        <span id="userPaginationInfo" class="text-sm text-default-500"></span>
+                        <div id="userPagination" class="flex items-center gap-1"></div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Footer.cshtml")
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+<!-- Add User Modal -->
+<div id="addUserModal"
+     class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed start-0 top-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto"
+     role="dialog" tabindex="-1" aria-labelledby="addUserModalLabel">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 m-3 flex max-w-sm scale-95 items-center opacity-0 transition-all duration-200 ease-in-out md:mx-auto md:w-full md:max-w-lg">
+        <div class="card pointer-events-auto flex w-full flex-col">
+            <div class="card-header p-5">
+                <h3 class="text-sm" id="addUserModalLabel">Dodaj novega uporabnika</h3>
+                <button aria-label="Zapri" data-hs-overlay="#addUserModal" type="button">
+                    <i class="iconify tabler--x text-xl"></i>
+                </button>
+            </div>
+            <form id="addUserForm" autocomplete="off">
+                @Html.AntiForgeryToken()
+                <div class="card-body space-y-4">
+                    <div id="addUserError" class="alert alert-danger py-2 text-sm hidden">
+                        <i class="iconify tabler--circle-x me-1"></i>
+                        <span id="addUserErrorMsg"></span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="md:col-span-2">
+                            <label class="form-label" for="newUserEmail">E-mail <span class="text-danger">*</span></label>
+                            <input class="form-input" id="newUserEmail" name="NewUserEmail"
+                                   placeholder="ime@domena.si" type="email" required autocomplete="off" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="form-label" for="newUserFullName">Polno ime</label>
+                            <input class="form-input" id="newUserFullName" name="NewUserFullName"
+                                   placeholder="Ime Priimek" type="text" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="form-label" for="newUserPassword">Geslo <span class="text-danger">*</span></label>
+                            <input class="form-input" id="newUserPassword" name="NewUserPassword"
+                                   placeholder="Min. 8 znakov, 1 številka, 1 velika črka" type="password" required autocomplete="new-password" />
+                        </div>
+                        <div>
+                            <label class="form-label" for="newUserRole">Vloga <span class="text-danger">*</span></label>
+                            <select class="form-select" id="newUserRole" name="NewUserRole" required>
+                                <option value="" disabled selected>— izberi vlogo —</option>
+                                @foreach (var role in Model.AvailableRoles)
+                                {
+                                    <option value="@role">@role</option>
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label" for="newUserCompanyId">Podjetje</label>
+                            <select class="form-select" id="newUserCompanyId" name="NewUserCompanyId">
+                                <option value="">— brez podjetja —</option>
+                                @foreach (var c in Model.Companies)
+                                {
+                                    <option value="@c.Id">@c.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-default-300 flex items-center justify-end gap-x-2 border-t p-4">
+                    <button class="btn bg-light hover:text-primary" data-hs-overlay="#addUserModal" type="button">Prekliči</button>
+                    <button id="addUserSubmitBtn" class="btn bg-success text-white hover:bg-success-hover" type="submit">Dodaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Assign Role Modal -->
+<div id="assignRoleModal"
+     class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed start-0 top-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto"
+     role="dialog" tabindex="-1" aria-labelledby="assignRoleModalLabel">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 m-3 flex max-w-sm scale-95 items-center opacity-0 transition-all duration-200 ease-in-out md:mx-auto md:w-full md:max-w-lg">
+        <div class="card pointer-events-auto flex w-full flex-col">
+            <div class="card-header p-5">
+                <h3 class="text-sm" id="assignRoleModalLabel">Dodeli vlogo</h3>
+                <button aria-label="Zapri" data-hs-overlay="#assignRoleModal" type="button">
+                    <i class="iconify tabler--x text-xl"></i>
+                </button>
+            </div>
+            <form method="post" asp-page-handler="AssignRole">
+                <div class="card-body">
+                    <p class="text-default-500 text-sm mb-4">
+                        Uporabnik: <strong id="assignRoleUserName"></strong>
+                    </p>
+                    <input type="hidden" name="AssignRoleUserId" id="assignRoleUserId" />
+                    <div>
+                        <label class="form-label" for="assignRoleSelect">Vloga</label>
+                        <select class="form-select" name="AssignRoleName" id="assignRoleSelect">
+                            <option value="">— brez vloge —</option>
+                            @foreach (var role in Model.AvailableRoles)
+                            {
+                                <option value="@role">@role</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="border-default-300 flex items-center justify-end gap-x-2 border-t p-4">
+                    <button class="btn bg-light hover:text-primary" data-hs-overlay="#assignRoleModal" type="button">Prekliči</button>
+                    <button class="btn bg-primary text-white hover:bg-primary-hover" type="submit">Shrani</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Assign Company Modal -->
+<div id="assignCompanyModal"
+     class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed start-0 top-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto"
+     role="dialog" tabindex="-1" aria-labelledby="assignCompanyModalLabel">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 m-3 flex max-w-sm scale-95 items-center opacity-0 transition-all duration-200 ease-in-out md:mx-auto md:w-full md:max-w-lg">
+        <div class="card pointer-events-auto flex w-full flex-col">
+            <div class="card-header p-5">
+                <h3 class="text-sm" id="assignCompanyModalLabel">Dodeli podjetje</h3>
+                <button aria-label="Zapri" data-hs-overlay="#assignCompanyModal" type="button">
+                    <i class="iconify tabler--x text-xl"></i>
+                </button>
+            </div>
+            <form method="post" asp-page-handler="AssignCompany">
+                <div class="card-body">
+                    <p class="text-default-500 text-sm mb-4">
+                        Uporabnik: <strong id="modalUserName"></strong>
+                    </p>
+                    <input type="hidden" name="UserId" id="modalUserId" />
+                    <div>
+                        <label class="form-label" for="modalCompanyId">Podjetje</label>
+                        <select class="form-select" name="CompanyId" id="modalCompanyId">
+                            <option value="">— brez podjetja —</option>
+                            @foreach (var c in Model.Companies)
+                            {
+                                <option value="@c.Id">@c.Name@(c.TaxNumber is not null ? $" ({c.TaxNumber})" : "")</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="border-default-300 flex items-center justify-end gap-x-2 border-t p-4">
+                    <button class="btn bg-light hover:text-primary" data-hs-overlay="#assignCompanyModal" type="button">Prekliči</button>
+                    <button class="btn bg-primary text-white hover:bg-primary-hover" type="submit">Shrani</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Add Company Modal -->
+<div id="addCompanyModal"
+     class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed start-0 top-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto"
+     role="dialog" tabindex="-1" aria-labelledby="addCompanyModalLabel">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 m-3 flex max-w-sm scale-95 items-center opacity-0 transition-all duration-200 ease-in-out md:mx-auto md:w-full md:max-w-lg">
+        <div class="card pointer-events-auto flex w-full flex-col">
+            <div class="card-header p-5">
+                <h3 class="text-sm" id="addCompanyModalLabel">Dodaj podjetje</h3>
+                <button aria-label="Zapri" data-hs-overlay="#addCompanyModal" type="button">
+                    <i class="iconify tabler--x text-xl"></i>
+                </button>
+            </div>
+            <form method="post" asp-page-handler="AddCompany">
+                <div class="card-body space-y-4">
+                    <div>
+                        <label class="form-label" for="newCompanyName">Naziv podjetja <span class="text-danger">*</span></label>
+                        <input class="form-input" id="newCompanyName" name="NewCompanyName"
+                               placeholder="npr. Acme d.o.o." required maxlength="200" />
+                    </div>
+                    <div>
+                        <label class="form-label" for="newCompanyTaxNumber">Davčna številka</label>
+                        <input class="form-input" id="newCompanyTaxNumber" name="NewCompanyTaxNumber"
+                               placeholder="npr. SI12345678" maxlength="50" />
+                    </div>
+                </div>
+                <div class="border-default-300 flex items-center justify-end gap-x-2 border-t p-4">
+                    <button class="btn bg-light hover:text-primary" data-hs-overlay="#addCompanyModal" type="button">Prekliči</button>
+                    <button class="btn bg-primary text-white hover:bg-primary-hover" type="submit">Dodaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Pages/Shared/Partials/_FooterScripts.cshtml")
+
+@section Scripts {
+<script>
+    (function () {
+        var currentPage = 1;
+
+        function getPageSize() {
+            return parseInt(document.getElementById('userPageSize').value);
+        }
+
+        function getFilteredRows() {
+            var q = document.getElementById('userSearch').value.toLowerCase();
+            return Array.from(document.querySelectorAll('#usersTable tbody tr')).filter(function (row) {
+                return row.textContent.toLowerCase().includes(q);
+            });
+        }
+
+        function render() {
+            var pageSize = getPageSize();
+            var filtered = getFilteredRows();
+            var total = filtered.length;
+            var totalPages = Math.max(1, Math.ceil(total / pageSize));
+            if (currentPage > totalPages) currentPage = totalPages;
+            var start = (currentPage - 1) * pageSize;
+            var end = start + pageSize;
+
+            // hide all, show current page
+            Array.from(document.querySelectorAll('#usersTable tbody tr')).forEach(function (row) {
+                row.style.display = 'none';
+            });
+            filtered.slice(start, end).forEach(function (row) {
+                row.style.display = '';
+            });
+
+            // update count
+            document.getElementById('userCount').textContent = total;
+            document.getElementById('userPaginationInfo').textContent =
+                total === 0 ? 'Ni rezultatov' :
+                'Prikazujem ' + (start + 1) + '–' + Math.min(end, total) + ' od ' + total;
+
+            // render pagination buttons
+            var pag = document.getElementById('userPagination');
+            pag.innerHTML = '';
+
+            function makeBtn(label, page, disabled, active) {
+                var btn = document.createElement('button');
+                btn.className = 'btn btn-sm ' + (active ? 'bg-primary text-white' : 'border border-default-300 hover:border-default-400');
+                btn.textContent = label;
+                btn.disabled = disabled;
+                if (!disabled) btn.addEventListener('click', function () { currentPage = page; render(); });
+                return btn;
+            }
+
+            pag.appendChild(makeBtn('«', 1, currentPage === 1, false));
+            pag.appendChild(makeBtn('‹', currentPage - 1, currentPage === 1, false));
+
+            var startPage = Math.max(1, currentPage - 2);
+            var endPage = Math.min(totalPages, startPage + 4);
+            if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
+            for (var p = startPage; p <= endPage; p++) {
+                pag.appendChild(makeBtn(p, p, false, p === currentPage));
+            }
+
+            pag.appendChild(makeBtn('›', currentPage + 1, currentPage === totalPages, false));
+            pag.appendChild(makeBtn('»', totalPages, currentPage === totalPages, false));
+        }
+
+        document.getElementById('userSearch').addEventListener('input', function () { currentPage = 1; render(); });
+        document.getElementById('userPageSize').addEventListener('change', function () { currentPage = 1; render(); });
+
+        render();
+    })();
+
+    document.querySelectorAll('[data-hs-overlay="#assignRoleModal"]').forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.getElementById('assignRoleUserId').value = this.dataset.userId ?? '';
+            document.getElementById('assignRoleUserName').textContent = this.dataset.userName ?? '';
+            var sel = document.getElementById('assignRoleSelect');
+            var currentRole = this.dataset.userRole ?? '';
+            for (var i = 0; i < sel.options.length; i++)
+                sel.options[i].selected = sel.options[i].value === currentRole;
+        });
+    });
+
+    document.querySelectorAll('[data-hs-overlay="#assignCompanyModal"]').forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.getElementById('modalUserId').value = this.dataset.userId ?? '';
+            document.getElementById('modalUserName').textContent = this.dataset.userName ?? '';
+            document.getElementById('modalCompanyId').value = this.dataset.companyId ?? '';
+        });
+    });
+
+    document.getElementById('addUserForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const btn = document.getElementById('addUserSubmitBtn');
+        const errorEl = document.getElementById('addUserError');
+        const errorMsg = document.getElementById('addUserErrorMsg');
+
+        btn.disabled = true;
+        btn.textContent = 'Dodajam...';
+        errorEl.classList.add('hidden');
+
+        const token = this.querySelector('input[name="__RequestVerificationToken"]').value;
+        const formData = new FormData(this);
+
+        try {
+            const resp = await fetch('/admin/users?handler=AddUser', {
+                method: 'POST',
+                headers: { 'RequestVerificationToken': token },
+                body: formData
+            });
+            const data = await resp.json();
+
+            if (data.success) {
+                location.reload();
+            } else {
+                errorMsg.textContent = data.message;
+                errorEl.classList.remove('hidden');
+                btn.disabled = false;
+                btn.textContent = 'Dodaj';
+            }
+        } catch {
+            errorMsg.textContent = 'Prišlo je do napake. Poskusite znova.';
+            errorEl.classList.remove('hidden');
+            btn.disabled = false;
+            btn.textContent = 'Dodaj';
+        }
+    });
+
+    function resetAddUserModal() {
+        document.getElementById('addUserForm').reset();
+        document.getElementById('addUserError').classList.add('hidden');
+        var btn = document.getElementById('addUserSubmitBtn');
+        btn.disabled = false;
+        btn.textContent = 'Dodaj';
+    }
+
+    document.getElementById('addUserModal').addEventListener('open.hs.overlay', resetAddUserModal);
+    document.getElementById('addUserModal').addEventListener('close.hs.overlay', resetAddUserModal);
+</script>
+}

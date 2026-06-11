@@ -1,0 +1,65 @@
+@page "/layouts/boxed"
+@model Starterkit.Pages.Layouts.BoxedModel
+
+
+@{
+    ViewBag.title = "Boxed";
+    ViewBag.subtitle = "Layouts";
+    ViewBag.HTMLAttributes = "data-layout-width=boxed data-sidenav-size=hover";
+}
+
+
+@section Styles {
+
+}
+
+
+<div class="wrapper">
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Topbar.cshtml")
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Sidenav.cshtml")
+
+        <!-- Start Page Content here -->
+<div class="page-content">
+<main>
+
+                @await Html.PartialAsync("~/Pages/Shared/Partials/_PageTitle.cshtml")
+
+                <div class="container">
+<div class="bg-info/10 text-info border-s-3 border-info rounded-md flex items-start gap-3 py-3 px-4 mb-4">
+<div>
+<i class="iconify tabler--info-circle text-xl"></i>
+</div>
+<div>
+                            To enable the boxed layout, add
+                            <code>data-layout-width="boxed"</code>
+                            to the
+                            <code>&lt;html&gt;</code>
+                            tag. For optimal spacing and usability, we also recommend adding
+                            <code>data-sidenav-size="on-hover"</code>
+                            to make the sidebar compact while keeping more room for content.
+                        </div>
+</div>
+<div class="card">
+<div class="card-body text-center">
+<h4 class="text-lg">Your custom content here</h4>
+</div>
+<!-- end card-body-->
+</div>
+<!-- end card-->
+</div>
+</main>
+
+            @await Html.PartialAsync("~/Pages/Shared/Partials/_Footer.cshtml")
+        </div>
+<!-- End Page content -->
+</div>
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_FooterScripts.cshtml")
+
+
+@section Scripts {
+
+}

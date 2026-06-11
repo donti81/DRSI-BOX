@@ -1,0 +1,101 @@
+@page "/auth/new-pass"
+@model Starterkit.Pages.Auth.NewPassModel
+
+
+@{
+    ViewBag.title = "New Password";
+}
+
+
+@section Styles {
+
+}
+
+
+<!-- Start Page Content here -->
+<div class="flex min-h-screen items-center p-12.5">
+<div class="container">
+<div class="flex justify-center px-2.5">
+<div class="2xl:w-4/10 md:w-1/2 sm:w-2/3 w-full">
+<div class="absolute end-0 top-0">
+<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+</div>
+<div class="absolute start-0 bottom-0 rotate-180">
+<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+</div>
+<div class="card p-7.5 rounded-2xl">
+<!-- Auth Brand Logo -->
+<div class="mb-3 flex flex-col items-center justify-center text-center">
+<a class="auth-logo" href="/">
+<img alt="logo" class="flex dark:hidden" src="/images/logo-black.png"/>
+<img alt="dark logo" class="hidden dark:flex" src="/images/logo.png"/>
+</a>
+<p class="text-default-400 mx-auto mt-6 mb-4 w-full lg:w-3/4">Vnesite novo geslo za vaš račun.</p>
+</div>
+<form method="post">
+@Html.AntiForgeryToken()
+<input asp-for="Input.Email" type="hidden" />
+<input asp-for="Input.Token" type="hidden" />
+<div asp-validation-summary="ModelOnly" class="mb-4 text-sm text-danger"></div>
+<div class="mb-5">
+<label class="form-label">
+                                    E-poštni naslov
+</label>
+<div class="input-group">
+<input class="form-input bg-gray-100" value="@Model.Input.Email" readonly type="email"/>
+</div>
+</div>
+<div class="mb-5" data-password="bar">
+<label class="form-label" for="userPassword">
+                                    Novo geslo
+                                    <span class="text-danger">*</span>
+</label>
+<input asp-for="Input.Password" class="form-input" id="userPassword" placeholder="••••••••" type="password"/>
+<div class="password-bar my-3"></div>
+<p class="text-default-400 text-xs">Vsaj 8 znakov, kombinacija črk, številk in simbolov.</p>
+</div>
+<div class="mb-5">
+<label class="form-label" for="userNewPassword">
+                                    Potrdi novo geslo
+                                    <span class="text-danger">*</span>
+</label>
+<div class="input-group">
+<input asp-for="Input.ConfirmPassword" class="form-input" id="userNewPassword" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div>
+<button class="btn bg-primary w-full py-3 font-semibold text-white hover:bg-primary-hover" type="submit">Nastavi geslo</button>
+</div>
+</form>
+<p class="text-default-400 text-center">
+                            Nazaj na
+                            <a class="underline text-primary font-semibold" href="/auth/sign-in">Prijavo</a>
+</p>
+</div>
+<!-- Auth Footer -->
+<p class="text-default-400 mt-7.5 text-center">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        Paces - by
+                        <span>Coderthemes</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+<!-- End Page content -->
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+    <!-- Two Factor Validator Js -->
+
+<!-- Password Suggestion Js -->
+
+
+
+@section Scripts {
+<script src="/js/pages/auth-two-factor.js" type="module"></script>
+    <script src="/js/pages/auth-password.js" type="module"></script>
+}

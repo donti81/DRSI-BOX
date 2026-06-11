@@ -1,0 +1,39 @@
+@page "/pages/empty"
+@model Starterkit.Pages.Pages.EmptyModel
+
+
+@{
+    ViewBag.title = "Empty";
+    ViewBag.subtitle = "Pages";
+}
+
+
+@section Styles {
+
+}
+
+
+<div class="wrapper">
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Topbar.cshtml")
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Sidenav.cshtml")
+
+        <!-- Start Page Content here -->
+<div class="page-content">
+<main>
+                @await Html.PartialAsync("~/Pages/Shared/Partials/_PageTitle.cshtml")
+            </main>
+
+            @await Html.PartialAsync("~/Pages/Shared/Partials/_Footer.cshtml")
+        </div>
+<!-- End Page content -->
+</div>
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_FooterScripts.cshtml")
+
+
+@section Scripts {
+
+}

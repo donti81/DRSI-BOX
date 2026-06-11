@@ -1,0 +1,52 @@
+@page "/layouts/preloader"
+@model Starterkit.Pages.Layouts.PreloaderModel
+
+
+@{
+    ViewBag.title = "Preloader";
+    ViewBag.subtitle = "Layouts";
+    ViewBag.HTMLAttributes = "data-layout=preloader";
+}
+
+
+@section Styles {
+
+}
+
+
+<div class="wrapper">
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Topbar.cshtml")
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Sidenav.cshtml")
+
+        <!-- Start Page Content here -->
+<div class="page-content">
+<main>
+
+                @await Html.PartialAsync("~/Pages/Shared/Partials/_PageTitle.cshtml")
+
+                <div class="fixed inset-0 z-50 flex items-center justify-center bg-white animate-[preloader_1s_ease_forwards]">
+<div class="size-8 animate-spin rounded-full border-3 border-primary border-t-transparent"></div>
+</div>
+<div class="card">
+<div class="card-body text-center">
+<h4 class="text-lg">Your custom content here</h4>
+</div>
+<!-- end card-body-->
+</div>
+<!-- end card-->
+</main>
+
+            @await Html.PartialAsync("~/Pages/Shared/Partials/_Footer.cshtml")
+        </div>
+<!-- End Page content -->
+</div>
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_FooterScripts.cshtml")
+
+
+@section Scripts {
+
+}

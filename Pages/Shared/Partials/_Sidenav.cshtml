@@ -1,0 +1,552 @@
+<aside class="app-menu" id="app-menu">
+<!-- Sidenav Menu Brand Logo -->
+<a class="logo-box" href="/">
+<!-- Light Brand Logo -->
+<span class="logo logo-light">
+<span class="logo-lg">
+<img alt="logo" src="/images/logo.png"/>
+</span>
+<span class="logo-sm">
+<img alt="small logo" src="/images/logo-sm.png"/>
+</span>
+</span>
+<!-- Dark Brand Logo -->
+<span class="logo logo-dark">
+<span class="logo-lg">
+<img alt="dark logo" src="/images/logo-black.png"/>
+</span>
+<span class="logo-sm">
+<img alt="small logo" src="/images/logo-sm.png"/>
+</span>
+</span>
+</a>
+<!-- Sidenav Menu Toggle Button -->
+<div class="h-topbar justify absolute end-5 top-0 flex items-center">
+<button id="button-hover-toggle">
+<span class="btn-on-hover-icon"></span>
+</button>
+</div>
+<!-- Sidenav Menu Item Link -->
+<div class="relative min-h-0 grow">
+<div class="size-full" data-simplebar="">
+<div class="sidenav-user p-5 bg-[url(/../images/user-bg-pattern.svg)]" id="user-profile-settings">
+<div class="flex items-center justify-between">
+<div>
+<a class="link-reset" href="#!">
+<img alt="user-image" class="mb-3 size-9 rounded-full" src="/images/users/user-1.jpg"/>
+<span class="sidenav-user-name block font-bold text-nowrap">David Dev</span>
+<span class="text-xs font-semibold" data-lang="user-role">Art Director</span>
+</a>
+</div>
+<div>
+<!-- Profile Dropdown Button -->
+<div class="hs-dropdown relative inline-flex [--placement:bottom-right]">
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Dropdown" class="cursor-pointer">
+<i class="iconify tabler--settings ms-1 size-6 align-middle"></i>
+</button>
+<div aria-labelledby="hs-dropdown-with-icons" aria-orientation="vertical" class="hs-dropdown-menu" role="menu">
+<!-- Header -->
+<div class="py-2 px-3.5">
+<h6 class="text-xs">Welcome back 👋!</h6>
+</div>
+<!-- My Profile -->
+<a class="dropdown-item" href="#!">
+<i class="iconify tabler--user-circle me-1 align-middle text-lg"></i>
+<span class="align-middle">Profile</span>
+</a>
+<!-- Settings -->
+<a class="dropdown-item" href="javascript:void(0);">
+<i class="iconify tabler--settings-2 me-1 align-middle text-lg"></i>
+<span class="align-middle">Account Settings</span>
+</a>
+<!-- Lock -->
+<a class="dropdown-item" href="/auth/lock-screen">
+<i class="iconify tabler--lock me-1 align-middle text-lg"></i>
+<span class="align-middle">Lock Screen</span>
+</a>
+<!-- Logout -->
+<a class="dropdown-item text-danger" href="javascript:void(0);">
+<i class="iconify tabler--logout me-1 align-middle text-lg"></i>
+<span class="align-middle">Log Out</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="sidenav-menu">
+<ul class="side-nav hs-accordion-group px-2.5 pb-16.5">
+<li class="menu-title mt-0!" data-lang="main">
+<span>Main</span>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/">
+<span class="menu-icon"><i class="iconify tabler--dashboard"></i></span>
+<span class="menu-text" data-lang="dashboard-ecommerce">Ecommerce</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/Form/FileUploads">
+<span class="menu-icon"><i class="iconify tabler--upload"></i></span>
+<span class="menu-text" data-lang="file-uploads">File uploads</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/Apps/file-manager">
+<span class="menu-icon"><i class="iconify tabler--folder"></i></span>
+<span class="menu-text" data-lang="file-manager">File manager</span>
+</a>
+</li>
+<li class="menu-item hs-accordion">
+<a aria-controls="users-management" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-icon"><i class="iconify tabler--users"></i></span>
+<span class="menu-text">Uporabniki</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden" id="users-management">
+<li class="menu-item">
+<a class="menu-link" href="/apps/users/roles">
+<span class="menu-text">Vloge</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/admin/users">
+<span class="menu-text">Upravljanje uporabnikov</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/admin/companies">
+<span class="menu-text">Podjetja</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/apps/users/account-settings">
+<span class="menu-text">Nastavitve računa</span>
+</a>
+</li>
+</ul>
+</li>
+<li class="menu-title mt-0!" data-lang="custom-pages">
+<span>Custom Pages</span>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/pages/empty">
+<span class="menu-icon"><i class="iconify tabler--files"></i></span>
+<span class="menu-text" data-lang="pages-empty">Empty Page</span>
+</a>
+</li>
+<li class="menu-item hs-accordion">
+<a aria-controls="authentication" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-icon"><i class="iconify tabler--password-user"></i></span>
+<span class="menu-text" data-lang="authentication">Authentication</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item hs-accordion">
+<a aria-controls="auth-basic" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-text" data-lang="auth-basic">Basic</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item">
+<a class="menu-link" href="/auth/sign-in">
+<span class="menu-text" data-lang="auth-sign-in">Sign In</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth/sign-up">
+<span class="menu-text" data-lang="auth-sign-up">Sign Up</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth/reset-pass">
+<span class="menu-text" data-lang="auth-reset-pass">Reset Password</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth/new-pass">
+<span class="menu-text" data-lang="auth-new-pass">New Password</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth/two-factor">
+<span class="menu-text" data-lang="auth-two-factor">Two Factor</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth/lock-screen">
+<span class="menu-text" data-lang="auth-lock-screen">Lock Screen</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth/success-mail">
+<span class="menu-text" data-lang="auth-success-mail">Success Mail</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth/login-pin">
+<span class="menu-text" data-lang="auth-login-pin">Login with PIN</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth/delete-account">
+<span class="menu-text" data-lang="auth-delete-account">Delete Account</span>
+</a>
+</li>
+</ul>
+</li>
+<li class="menu-item hs-accordion">
+<a aria-controls="auth-card" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-text" data-lang="auth-card">Card</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item">
+<a class="menu-link" href="/auth-card/sign-in">
+<span class="menu-text" data-lang="auth-card-sign-in">Sign In</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-card/sign-up">
+<span class="menu-text" data-lang="auth-card-sign-up">Sign Up</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-card/reset-pass">
+<span class="menu-text" data-lang="auth-card-reset-pass">Reset Password</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-card/new-pass">
+<span class="menu-text" data-lang="auth-card-new-pass">New Password</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-card/two-factor">
+<span class="menu-text" data-lang="auth-card-two-factor">Two Factor</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-card/lock-screen">
+<span class="menu-text" data-lang="auth-card-lock-screen">Lock Screen</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-card/success-mail">
+<span class="menu-text" data-lang="auth-card-success-mail">Success Mail</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-card/login-pin">
+<span class="menu-text" data-lang="auth-card-login-pin">Login with PIN</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-card/delete-account">
+<span class="menu-text" data-lang="auth-card-delete-account">Delete Account</span>
+</a>
+</li>
+</ul>
+</li>
+<li class="menu-item hs-accordion">
+<a aria-controls="auth-split" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-text" data-lang="auth-split">Split</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item">
+<a class="menu-link" href="/auth-split/sign-in">
+<span class="menu-text" data-lang="auth-split-sign-in">Sign In</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-split/sign-up">
+<span class="menu-text" data-lang="auth-split-sign-up">Sign Up</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-split/reset-pass">
+<span class="menu-text" data-lang="auth-split-reset-pass">Reset Password</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-split/new-pass">
+<span class="menu-text" data-lang="auth-split-new-pass">New Password</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-split/two-factor">
+<span class="menu-text" data-lang="auth-split-two-factor">Two Factor</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-split/lock-screen">
+<span class="menu-text" data-lang="auth-split-lock-screen">Lock Screen</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-split/success-mail">
+<span class="menu-text" data-lang="auth-split-success-mail">Success Mail</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-split/login-pin">
+<span class="menu-text" data-lang="auth-split-login-pin">Login with PIN</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/auth-split/delete-account">
+<span class="menu-text" data-lang="auth-split-delete-account">Delete Account</span>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="menu-item hs-accordion">
+<a aria-controls="error-pages" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-icon"><i class="iconify tabler--alert-triangle"></i></span>
+<span class="menu-text" data-lang="error-pages">Error Pages</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item">
+<a class="menu-link" href="/error/400">
+<span class="menu-text" data-lang="error-400">400 Bad Request</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/error/401">
+<span class="menu-text" data-lang="error-401">401 Unauthorized</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/error/403">
+<span class="menu-text" data-lang="error-403">403 Forbidden</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/error/404">
+<span class="menu-text" data-lang="error-404">404 Not Found</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/error/408">
+<span class="menu-text" data-lang="error-408">408 Request Timeout</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/error/500">
+<span class="menu-text" data-lang="error-500">500 Internal Server</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/error/maintenance">
+<span class="menu-text" data-lang="error-maintenance">Maintenance</span>
+</a>
+</li>
+</ul>
+</li>
+<li class="menu-title mt-0!" data-lang="layouts">
+<span>Layouts</span>
+</li>
+<li class="menu-item hs-accordion">
+<a aria-controls="layout-options" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-icon"><i class="iconify tabler--layout"></i></span>
+<span class="menu-text" data-lang="layout-options">Layout Options</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item">
+<a class="menu-link" href="/layouts/horizontal" target="_blank">
+<span class="menu-text" data-lang="layouts-horizontal">Horizontal</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/boxed" target="_blank">
+<span class="menu-text" data-lang="layouts-boxed">Boxed</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/scrollable" target="_blank">
+<span class="menu-text" data-lang="layouts-scrollable">Scrollable</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/compact" target="_blank">
+<span class="menu-text" data-lang="layouts-compact">Compact</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/preloader" target="_blank">
+<span class="menu-text" data-lang="layouts-preloader">Preloader</span>
+</a>
+</li>
+</ul>
+</li>
+<li class="menu-item hs-accordion">
+<a aria-controls="sidebars" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-icon"><i class="iconify tabler--layout-sidebar-inactive"></i></span>
+<span class="menu-text" data-lang="sidebars">Sidebars</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item">
+<a class="menu-link" href="/layouts/sidebar/light" target="_blank">
+<span class="menu-text" data-lang="layouts-sidebar-light">Light Menu</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/sidebar/gradient" target="_blank">
+<span class="menu-text" data-lang="layouts-sidebar-gradient">Gradient Menu</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/sidebar/gray" target="_blank">
+<span class="menu-text" data-lang="layouts-sidebar-gray">Gray Menu</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/sidebar/image" target="_blank">
+<span class="menu-text" data-lang="layouts-sidebar-image">Image Menu</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/sidebar/compact" target="_blank">
+<span class="menu-text" data-lang="layouts-sidebar-compact">Compact Menu</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/sidebar/on-hover" target="_blank">
+<span class="menu-text" data-lang="layouts-sidebar-on-hover">On Hover Menu</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/sidebar/offcanvas" target="_blank">
+<span class="menu-text" data-lang="layouts-sidebar-offcanvas">Offcanvas Menu</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/sidebar/no-icons" target="_blank">
+<span class="menu-text" data-lang="layouts-sidebar-no-icons">No Icons with Lines</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/sidebar/with-lines" target="_blank">
+<span class="menu-text" data-lang="layouts-sidebar-with-lines">Sidebar with Lines</span>
+</a>
+</li>
+</ul>
+</li>
+<li class="menu-item hs-accordion">
+<a aria-controls="topbar" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-icon"><i class="iconify tabler--layout-bottombar"></i></span>
+<span class="menu-text" data-lang="topbar">Topbar</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item">
+<a class="menu-link" href="/layouts/topbar/dark" target="_blank">
+<span class="menu-text" data-lang="layouts-topbar-dark">Dark Topbar</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/topbar/gray" target="_blank">
+<span class="menu-text" data-lang="layouts-topbar-gray">Gray Topbar</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/layouts/topbar/gradient" target="_blank">
+<span class="menu-text" data-lang="layouts-topbar-gradient">Gradient Topbar</span>
+</a>
+</li>
+</ul>
+</li>
+<li class="menu-title mt-0!" data-lang="components">
+<span>Components</span>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="/icons/tabler">
+<span class="menu-icon"><i class="iconify tabler--icons"></i></span>
+<span class="menu-text" data-lang="icons-tabler">Tabler</span>
+</a>
+</li>
+<li class="menu-title mt-0!" data-lang="menu-items">
+<span>Menu Items</span>
+</li>
+<li class="menu-item hs-accordion">
+<a aria-controls="menu-levels" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-icon"><i class="iconify tabler--sitemap"></i></span>
+<span class="menu-text" data-lang="menu-levels">Menu Levels</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item hs-accordion">
+<a aria-controls="second-level" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-text" data-lang="second-level">Second Level</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item">
+<a class="menu-link" href="#">
+<span class="menu-text" data-lang="menu-item-1">Item 2.1</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="#">
+<span class="menu-text" data-lang="menu-item-2">Item 2.2</span>
+</a>
+</li>
+</ul>
+</li>
+<li class="menu-item hs-accordion">
+<a aria-controls="second-level-2" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-text" data-lang="second-level-2">Second Level</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item">
+<a class="menu-link" href="#">
+<span class="menu-text" data-lang="menu-item-3">Item 2.1</span>
+</a>
+</li>
+<li class="menu-item hs-accordion">
+<a aria-controls="menu-item-4" aria-expanded="false" class="hs-accordion-toggle menu-link" href="javascript:void(0)">
+<span class="menu-text" data-lang="menu-item-4">Item 2.2</span>
+<span class="menu-arrow"></span>
+</a>
+<ul class="sub-menu hs-accordion-content hs-accordion-group hidden">
+<li class="menu-item">
+<a class="menu-link" href="#">
+<span class="menu-text" data-lang="menu-item-5">Item 3.1</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link" href="#">
+<span class="menu-text" data-lang="menu-item-6">Item 3.2</span>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="menu-item">
+<a class="menu-link pointer-events-none opacity-50" href="#">
+<span class="menu-icon"><i class="iconify tabler--ban"></i></span>
+<span class="menu-text" data-lang="disabled-menu">Disabled Menu</span>
+</a>
+</li>
+<li class="menu-item">
+<a class="menu-link !bg-primary !text-white" href="#">
+<span class="menu-icon"><i class="iconify tabler--star"></i></span>
+<span class="menu-text !bg-inherit" data-lang="special-menu">Special Menu</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</aside>
+<!-- End Sidebar -->

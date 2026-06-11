@@ -1,0 +1,473 @@
+@page "/admin/companies"
+@model Starterkit.Pages.Admin.Companies.IndexModel
+
+@{
+    ViewBag.title = "Podjetja";
+    ViewBag.subtitle = "Admin";
+}
+
+<div class="wrapper">
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Topbar.cshtml")
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Sidenav.cshtml")
+
+    <div class="page-content">
+        <main>
+            <div class="mt-5"></div>
+            <div class="container-fluid">
+
+                <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                        <h4 class="page-main-title mb-1.25">Podjetja</h4>
+                        <p class="text-default-400">Upravljanje podjetij in njihovih uporabnikov.</p>
+                    </div>
+                    <button class="btn bg-primary text-white hover:bg-primary-hover"
+                            data-hs-overlay="#addCompanyModal"
+                            aria-haspopup="dialog" aria-expanded="false">
+                        <i class="iconify tabler--building-plus me-1"></i>
+                        Dodaj podjetje
+                    </button>
+                </div>
+
+                @if (Model.StatusMessage is not null)
+                {
+                    <div class="alert alert-success mb-4">
+                        <i class="iconify tabler--circle-check me-2"></i>@Model.StatusMessage
+                    </div>
+                }
+
+                <div class="card">
+                    <div class="card-header flex items-center justify-between gap-3">
+                        <h5 class="text-sm font-semibold">Podjetja (<span id="companyCount">@Model.Companies.Count</span>)</h5>
+                        <div class="flex items-center gap-3">
+                            <div class="input-icon-group w-64">
+                                <i class="iconify tabler--search input-icon"></i>
+                                <input class="form-input" id="companySearch" placeholder="Išči podjetja..." type="search" autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header border-t flex items-center justify-between gap-3 py-2">
+                        <div class="flex items-center gap-2 text-sm text-default-500">
+                            Prikaži
+                            <select id="companyPageSize" class="form-select form-select-sm w-16">
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                            na stran
+                        </div>
+                        <span id="companyCountInfo" class="text-sm text-default-500"></span>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="table table-hover" id="companiesTable">
+                            <thead class="thead-sm">
+                                <tr class="bg-light/25 text-2xs uppercase">
+                                    <th>Naziv podjetja</th>
+                                    <th>Davčna številka</th>
+                                    <th>Naslov</th>
+                                    <th>Pošta</th>
+                                    <th class="text-center">Uporabniki</th>
+                                    <th class="text-center">Akcije</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var company in Model.Companies)
+                                {
+                                    <tr>
+                                        <td>
+                                            <h5 class="mb-0">@company.Name</h5>
+                                        </td>
+                                        <td>
+                                            @if (company.TaxNumber is not null)
+                                            {
+                                                <span class="text-default-600 text-sm">@company.TaxNumber</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-default-400 text-xs">—</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (company.Naslov is not null)
+                                            {
+                                                <span class="text-default-600 text-sm">@company.Naslov</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-default-400 text-xs">—</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (company.Posta is not null)
+                                            {
+                                                <span class="text-default-600 text-sm">@company.Posta @company.PostaNaziv</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-default-400 text-xs">—</span>
+                                            }
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="badge badge-label bg-primary/15 text-primary">@company.UserCount</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="flex justify-center gap-1">
+                                                <button class="btn btn-icon btn-sm border border-default-300 hover:border-default-400"
+                                                        title="Uredi"
+                                                        data-hs-overlay="#editCompanyModal"
+                                                        aria-haspopup="dialog" aria-expanded="false"
+                                                        data-id="@company.Id"
+                                                        data-name="@company.Name"
+                                                        data-tax="@(company.TaxNumber ?? "")"
+                                                        data-naslov="@(company.Naslov ?? "")"
+                                                        data-posta="@(company.Posta?.ToString() ?? "")"
+                                                        data-posta-naziv="@(company.PostaNaziv ?? "")"
+                                                        >
+                                                    <i class="iconify tabler--edit text-base"></i>
+                                                </button>
+                                                <button class="btn btn-icon btn-sm border border-danger/40 text-danger hover:border-danger hover:bg-danger/10"
+                                                        title="Izbriši"
+                                                        data-hs-overlay="#deleteCompanyModal"
+                                                        aria-haspopup="dialog" aria-expanded="false"
+                                                        data-id="@company.Id"
+                                                        data-name="@company.Name"
+                                                        data-user-count="@company.UserCount">
+                                                    <i class="iconify tabler--trash text-base"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer flex items-center justify-between gap-3">
+                        <span id="companyPaginationInfo" class="text-sm text-default-500"></span>
+                        <div id="companyPagination" class="flex items-center gap-1"></div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Footer.cshtml")
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+<!-- Add Company Modal -->
+<div id="addCompanyModal"
+     class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed start-0 top-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto"
+     role="dialog" tabindex="-1" aria-labelledby="addCompanyModalLabel">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 m-3 flex max-w-sm scale-95 items-center opacity-0 transition-all duration-200 ease-in-out md:mx-auto md:w-full md:max-w-lg">
+        <div class="card pointer-events-auto flex w-full flex-col">
+            <div class="card-header p-5">
+                <h3 class="text-sm" id="addCompanyModalLabel">Dodaj podjetje</h3>
+                <button aria-label="Zapri" data-hs-overlay="#addCompanyModal" type="button">
+                    <i class="iconify tabler--x text-xl"></i>
+                </button>
+            </div>
+            <form id="addCompanyForm" method="post" asp-page-handler="Add">
+                <div class="card-body space-y-4">
+                    <div id="addCompanyError" class="alert alert-danger py-2 text-sm hidden">
+                        <i class="iconify tabler--circle-x me-1"></i>
+                        <span id="addCompanyErrorMsg"></span>
+                    </div>
+                    <div>
+                        <label class="form-label" for="newCompanyName">Naziv podjetja <span class="text-danger">*</span></label>
+                        <input class="form-input" id="newCompanyName" name="NewCompanyName"
+                               placeholder="npr. Acme d.o.o." required maxlength="200" autocomplete="off" />
+                    </div>
+                    <div>
+                        <label class="form-label" for="newCompanyTaxNumber">Davčna številka <span class="text-danger">*</span></label>
+                        <input class="form-input" id="newCompanyTaxNumber" name="NewCompanyTaxNumber"
+                               placeholder="npr. SI12345678" maxlength="50" autocomplete="off" required />
+                        <p id="newTaxError" class="text-danger text-xs mt-1 hidden">Davčna številka ni veljavna.</p>
+                    </div>
+                    <div>
+                        <label class="form-label" for="newNaslov">Naslov</label>
+                        <input class="form-input" id="newNaslov" name="NewNaslov"
+                               placeholder="npr. Dunajska cesta 1" maxlength="60" autocomplete="off" />
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="form-label" for="newPosta">Poštna številka</label>
+                            <input class="form-input" id="newPosta" name="NewPosta"
+                                   placeholder="npr. 1000" type="number" min="1000" max="9999" autocomplete="off" />
+                        </div>
+                        <div>
+                            <label class="form-label" for="newPostaNaziv">Naziv pošte</label>
+                            <input class="form-input" id="newPostaNaziv" name="NewPostaNaziv"
+                                   placeholder="npr. Ljubljana" maxlength="60" autocomplete="off" />
+                        </div>
+                    </div>
+                </div>
+                <div class="border-default-300 flex items-center justify-end gap-x-2 border-t p-4">
+                    <button class="btn bg-light hover:text-primary" data-hs-overlay="#addCompanyModal" type="button">Prekliči</button>
+                    <button class="btn bg-primary text-white hover:bg-primary-hover" type="submit">Dodaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Company Modal -->
+<div id="editCompanyModal"
+     class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed start-0 top-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto"
+     role="dialog" tabindex="-1" aria-labelledby="editCompanyModalLabel">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 m-3 flex max-w-sm scale-95 items-center opacity-0 transition-all duration-200 ease-in-out md:mx-auto md:w-full md:max-w-lg">
+        <div class="card pointer-events-auto flex w-full flex-col">
+            <div class="card-header p-5">
+                <h3 class="text-sm" id="editCompanyModalLabel">Uredi podjetje</h3>
+                <button aria-label="Zapri" data-hs-overlay="#editCompanyModal" type="button">
+                    <i class="iconify tabler--x text-xl"></i>
+                </button>
+            </div>
+            <form id="editCompanyForm" method="post" asp-page-handler="Edit">
+                <input type="hidden" name="EditId" id="editCompanyId" />
+                <div class="card-body space-y-4">
+                    <div id="editCompanyError" class="alert alert-danger py-2 text-sm hidden">
+                        <i class="iconify tabler--circle-x me-1"></i>
+                        <span id="editCompanyErrorMsg"></span>
+                    </div>
+                    <div>
+                        <label class="form-label" for="editCompanyName">Naziv podjetja <span class="text-danger">*</span></label>
+                        <input class="form-input" id="editCompanyName" name="EditName"
+                               required maxlength="200" autocomplete="off" />
+                    </div>
+                    <div>
+                        <label class="form-label" for="editCompanyTaxNumber">Davčna številka</label>
+                        <input class="form-input" id="editCompanyTaxNumber" name="EditTaxNumber"
+                               placeholder="npr. SI12345678" maxlength="50" autocomplete="off" />
+                        <p id="editTaxError" class="text-danger text-xs mt-1 hidden">Davčna številka ni veljavna.</p>
+                    </div>
+                    <div>
+                        <label class="form-label" for="editNaslov">Naslov</label>
+                        <input class="form-input" id="editNaslov" name="EditNaslov"
+                               placeholder="npr. Dunajska cesta 1" maxlength="60" autocomplete="off" />
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="form-label" for="editPosta">Poštna številka</label>
+                            <input class="form-input" id="editPosta" name="EditPosta"
+                                   placeholder="npr. 1000" type="number" min="1000" max="9999" autocomplete="off" />
+                        </div>
+                        <div>
+                            <label class="form-label" for="editPostaNaziv">Naziv pošte</label>
+                            <input class="form-input" id="editPostaNaziv" name="EditPostaNaziv"
+                                   placeholder="npr. Ljubljana" maxlength="60" autocomplete="off" />
+                        </div>
+                    </div>
+                </div>
+                <div class="border-default-300 flex items-center justify-end gap-x-2 border-t p-4">
+                    <button class="btn bg-light hover:text-primary" data-hs-overlay="#editCompanyModal" type="button">Prekliči</button>
+                    <button class="btn bg-primary text-white hover:bg-primary-hover" type="submit">Shrani</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Company Modal -->
+<div id="deleteCompanyModal"
+     class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed start-0 top-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto"
+     role="dialog" tabindex="-1" aria-labelledby="deleteCompanyModalLabel">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 m-3 flex max-w-sm scale-95 items-center opacity-0 transition-all duration-200 ease-in-out md:mx-auto md:w-full md:max-w-lg">
+        <div class="card pointer-events-auto flex w-full flex-col">
+            <div class="card-header p-5">
+                <h3 class="text-sm" id="deleteCompanyModalLabel">Izbriši podjetje</h3>
+                <button aria-label="Zapri" data-hs-overlay="#deleteCompanyModal" type="button">
+                    <i class="iconify tabler--x text-xl"></i>
+                </button>
+            </div>
+            <div class="card-body">
+                <p class="text-default-600 text-sm">
+                    Ali ste prepričani, da želite izbrisati podjetje <strong id="deleteCompanyName"></strong>?
+                </p>
+                <p id="deleteCompanyWarning" class="text-danger text-sm mt-2 hidden">
+                    Podjetja ni mogoče izbrisati, ker ima vezane uporabnike.
+                </p>
+            </div>
+            <form method="post" asp-page-handler="Delete">
+                <input type="hidden" name="DeleteId" id="deleteCompanyIdHidden" />
+                <div class="border-default-300 flex items-center justify-end gap-x-2 border-t p-4">
+                    <button class="btn bg-light hover:text-primary" data-hs-overlay="#deleteCompanyModal" type="button">Prekliči</button>
+                    <button id="deleteCompanyBtn" class="btn bg-danger text-white hover:bg-danger-hover" type="submit">Izbriši</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Pages/Shared/Partials/_FooterScripts.cshtml")
+
+@section Scripts {
+<script>
+    function validateDavcna(val) {
+        if (!val || val.trim() === '') return true;
+        var num = val.trim().toUpperCase();
+        if (num.startsWith('SI')) num = num.substring(2);
+        if (!/^\d{8}$/.test(num)) return false;
+        var d = num.split('').map(Number);
+        var sum = d[0]*8 + d[1]*7 + d[2]*6 + d[3]*5 + d[4]*4 + d[5]*3 + d[6]*2;
+        var control = 11 - (sum % 11);
+        if (control === 11 || control === 10) control = 0;
+        return control === d[7];
+    }
+
+    function hookTaxValidation(inputId, errorId, submitBtnSelector) {
+        var input = document.getElementById(inputId);
+        var error = document.getElementById(errorId);
+        var form = input.closest('form');
+        var btn = form.querySelector('button[type="submit"]');
+
+        input.addEventListener('input', function () {
+            var valid = validateDavcna(this.value);
+            error.classList.toggle('hidden', valid);
+            btn.disabled = !valid;
+        });
+
+        form.addEventListener('submit', function (e) {
+            if (!validateDavcna(input.value)) {
+                e.preventDefault();
+                error.classList.remove('hidden');
+            }
+        });
+    }
+
+    hookTaxValidation('newCompanyTaxNumber', 'newTaxError');
+    hookTaxValidation('editCompanyTaxNumber', 'editTaxError');
+
+    function ajaxForm(formId, errorId, errorMsgId) {
+        var form = document.getElementById(formId);
+        var errorEl = document.getElementById(errorId);
+        var errorMsgEl = document.getElementById(errorMsgId);
+        var btn = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            if (!form.checkValidity()) { form.reportValidity(); return; }
+            errorEl.classList.add('hidden');
+            btn.disabled = true;
+            var origText = btn.textContent;
+            btn.textContent = 'Shranjujem...';
+            var token = form.querySelector('input[name="__RequestVerificationToken"]')?.value ?? '';
+            try {
+                var resp = await fetch(form.action, { method: 'POST', headers: { 'RequestVerificationToken': token }, body: new FormData(form) });
+                var data = await resp.json();
+                if (data.success) {
+                    location.reload();
+                } else {
+                    errorMsgEl.textContent = data.message;
+                    errorEl.classList.remove('hidden');
+                    btn.disabled = false;
+                    btn.textContent = origText;
+                }
+            } catch {
+                errorMsgEl.textContent = 'Prišlo je do napake. Poskusite znova.';
+                errorEl.classList.remove('hidden');
+                btn.disabled = false;
+                btn.textContent = origText;
+            }
+        });
+    }
+
+    ajaxForm('addCompanyForm', 'addCompanyError', 'addCompanyErrorMsg');
+    ajaxForm('editCompanyForm', 'editCompanyError', 'editCompanyErrorMsg');
+
+    document.getElementById('addCompanyModal').addEventListener('close.hs.overlay', function () {
+        document.getElementById('addCompanyForm').reset();
+        document.getElementById('addCompanyError').classList.add('hidden');
+    });
+
+    // Edit modal
+    document.querySelectorAll('[data-hs-overlay="#editCompanyModal"]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.getElementById('editCompanyId').value = this.dataset.id;
+            document.getElementById('editCompanyName').value = this.dataset.name;
+            document.getElementById('editCompanyTaxNumber').value = this.dataset.tax;
+            document.getElementById('editNaslov').value = this.dataset.naslov ?? '';
+            document.getElementById('editPosta').value = this.dataset.posta ?? '';
+            document.getElementById('editPostaNaziv').value = this.dataset.postaNaziv ?? '';
+            document.getElementById('editCompanyError').classList.add('hidden');
+        });
+    });
+
+    // Delete modal
+    document.querySelectorAll('[data-hs-overlay="#deleteCompanyModal"]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.getElementById('deleteCompanyIdHidden').value = this.dataset.id;
+            document.getElementById('deleteCompanyName').textContent = this.dataset.name;
+            var hasUsers = parseInt(this.dataset.userCount) > 0;
+            document.getElementById('deleteCompanyWarning').classList.toggle('hidden', !hasUsers);
+            document.getElementById('deleteCompanyBtn').disabled = hasUsers;
+        });
+    });
+
+    // Search + pagination
+    (function () {
+        var currentPage = 1;
+
+        function getPageSize() {
+            return parseInt(document.getElementById('companyPageSize').value);
+        }
+
+        function getFilteredRows() {
+            var q = document.getElementById('companySearch').value.toLowerCase();
+            return Array.from(document.querySelectorAll('#companiesTable tbody tr')).filter(function (row) {
+                return row.textContent.toLowerCase().includes(q);
+            });
+        }
+
+        function render() {
+            var pageSize = getPageSize();
+            var filtered = getFilteredRows();
+            var total = filtered.length;
+            var totalPages = Math.max(1, Math.ceil(total / pageSize));
+            if (currentPage > totalPages) currentPage = totalPages;
+            var start = (currentPage - 1) * pageSize;
+            var end = start + pageSize;
+
+            Array.from(document.querySelectorAll('#companiesTable tbody tr')).forEach(function (row) {
+                row.style.display = 'none';
+            });
+            filtered.slice(start, end).forEach(function (row) {
+                row.style.display = '';
+            });
+
+            document.getElementById('companyCount').textContent = total;
+            document.getElementById('companyPaginationInfo').textContent =
+                total === 0 ? 'Ni rezultatov' :
+                'Prikazujem ' + (start + 1) + '–' + Math.min(end, total) + ' od ' + total;
+
+            var pag = document.getElementById('companyPagination');
+            pag.innerHTML = '';
+
+            function makeBtn(label, page, disabled, active) {
+                var btn = document.createElement('button');
+                btn.className = 'btn btn-sm ' + (active ? 'bg-primary text-white' : 'border border-default-300 hover:border-default-400');
+                btn.textContent = label;
+                btn.disabled = disabled;
+                if (!disabled) btn.addEventListener('click', function () { currentPage = page; render(); });
+                return btn;
+            }
+
+            pag.appendChild(makeBtn('«', 1, currentPage === 1, false));
+            pag.appendChild(makeBtn('‹', currentPage - 1, currentPage === 1, false));
+            var startPage = Math.max(1, currentPage - 2);
+            var endPage = Math.min(totalPages, startPage + 4);
+            if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
+            for (var p = startPage; p <= endPage; p++) {
+                pag.appendChild(makeBtn(p, p, false, p === currentPage));
+            }
+            pag.appendChild(makeBtn('›', currentPage + 1, currentPage === totalPages, false));
+            pag.appendChild(makeBtn('»', totalPages, currentPage === totalPages, false));
+        }
+
+        document.getElementById('companySearch').addEventListener('input', function () { currentPage = 1; render(); });
+        document.getElementById('companyPageSize').addEventListener('change', function () { currentPage = 1; render(); });
+
+        render();
+    })();
+</script>
+}

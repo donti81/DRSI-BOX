@@ -1,0 +1,63 @@
+@page "/layouts/sidebar/compact"
+@model Starterkit.Pages.Layouts.Sidebar.CompactModel
+
+
+@{
+    ViewBag.title = "Compact Sidebar";
+    ViewBag.subtitle = "Layout";
+    ViewBag.HTMLAttributes = "data-sidenav-size=md";
+}
+
+
+@section Styles {
+
+}
+
+
+<div class="wrapper">
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Topbar.cshtml")
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Sidenav.cshtml")
+
+        <!-- Start Page Content here -->
+<div class="page-content">
+<main>
+
+                @await Html.PartialAsync("~/Pages/Shared/Partials/_PageTitle.cshtml")
+
+                <div class="container-fluid">
+<div class="bg-info/10 text-info border-s-3 border-info rounded-md flex items-start gap-3 py-3 px-4 mb-4">
+<div>
+<i class="iconify tabler--info-circle text-xl"></i>
+</div>
+<div>
+                            To enable the medium-sized (compact) sidebar, add
+                            <code>data-sidenav-size="compact"</code>
+                            to the
+                            <code>&lt;html&gt;</code>
+                            tag.
+                        </div>
+</div>
+<div class="card">
+<div class="card-body text-center">
+<h4 class="text-lg">Your custom content here</h4>
+</div>
+<!-- end card-body-->
+</div>
+<!-- end card-->
+</div>
+</main>
+
+            @await Html.PartialAsync("~/Pages/Shared/Partials/_Footer.cshtml")
+        </div>
+<!-- End Page content -->
+</div>
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_FooterScripts.cshtml")
+
+
+@section Scripts {
+
+}

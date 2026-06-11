@@ -1,0 +1,525 @@
+@page "/apps/users/contacts"
+@model Paces.Pages.Apps.Users.ContactsModel
+
+
+@{
+    ViewBag.title = "Contacts";
+    ViewBag.subtitle = "Pages";
+}
+
+
+@section Styles {
+
+}
+
+
+<div class="wrapper">
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Topbar.cshtml")
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Sidenav.cshtml")
+
+        <!-- Start Page Content here -->
+<div class="page-content">
+<main>
+
+                @await Html.PartialAsync("~/Pages/Shared/Partials/_PageTitle.cshtml")
+
+                <div class="container-fluid">
+<div class="card mb-base">
+<div class="card-body">
+<div class="grid lg:grid-cols-3 gap-base">
+<!-- Search Input -->
+<div class="col-span-1">
+<div class="input-icon-group">
+<i class="iconify tabler--search input-icon"></i>
+<input class="form-input" placeholder="Search contact name..." type="text"/>
+</div>
+</div>
+<!-- Filters & Controls -->
+<div class="lg:col-span-2">
+<div class="flex flex-wrap items-center gap-3">
+<span class="font-semibold me-3">Filter By:</span>
+<!-- Designation Filter -->
+<div class="input-icon-group">
+<i class="iconify tabler--user-check input-icon"></i>
+<select class="form-select">
+<option selected="">Designation</option>
+<option value="Backend Engineer">Backend Engineer</option>
+<option value="Content Strategist">Content Strategist</option>
+<option value="Full Stack Developer">Full Stack Developer</option>
+<option value="Data Scientist">Data Scientist</option>
+</select>
+</div>
+<!-- Location Filter -->
+<div class="input-icon-group">
+<i class="iconify tabler--map-pin input-icon"></i>
+<select class="form-select">
+<option selected="">Location</option>
+<option value="Canada">Canada</option>
+<option value="Italy">Italy</option>
+<option value="Japan">Japan</option>
+<option value="Egypt">Egypt</option>
+</select>
+</div>
+<!-- Department Filter -->
+<div class="input-icon-group">
+<i class="iconify tabler--stack-2 input-icon"></i>
+<select class="form-select">
+<option selected="">Department</option>
+<option value="Engineering">Engineering</option>
+<option value="Marketing">Marketing</option>
+<option value="Development">Development</option>
+<option value="Data">Data</option>
+</select>
+</div>
+<!-- Submit Button -->
+<button class="btn bg-secondary text-white hover:bg-secondary-hover" type="submit">Apply</button>
+<!-- Layout Toggle Buttons -->
+<div class="ms-auto">
+<nav aria-label="Tabs" aria-orientation="horizontal" class="flex items-center gap-x-1" role="tablist">
+<button aria-controls="tabs-contact-1" aria-selected="true" class="hs-tab-active:bg-primary hs-tab-active:text-white bg-primary/15 text-primary btn btn-icon active size-9.25!" data-hs-tab="#tabs-contact-1" id="contact-tab-1" role="tab" type="button">
+<i class="iconify tabler--apps text-lg"></i>
+</button>
+<button aria-controls="#tabs-contact-2" aria-selected="false" class="hs-tab-active:bg-primary hs-tab-active:text-white bg-primary/15 text-primary btn btn-icon size-9.25!" data-hs-tab="#tabs-contact-2" id="contact-tab-2" role="tab" type="button">
+<i class="iconify tabler--list-check text-lg"></i>
+</button>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-base lg:grid-cols-4">
+<!-- Profile Card 1: Sophia Carter -->
+<div class="card">
+<div class="card-body text-center">
+<!-- Avatar -->
+<img alt="avatar" class="mx-auto size-18 rounded-full" src="/images/users/user-1.jpg"/>
+<!-- Name & Flag -->
+<h5 class="mt-3 text-md flex items-center justify-center gap-1.5">
+<a class="hover:text-primary" href="/apps/users/profile">Sophia Carter</a>
+<img alt="UK" class="size-4 rounded" src="/images/flags/gb.svg"/>
+</h5>
+<!-- Designation & Badge -->
+<span class="text-default-400 text-xs">Lead UI/UX Designer</span>
+<div>
+<span class="badge bg-secondary text-white my-1.5">Admin</span>
+</div>
+<!-- Bio Line -->
+<span class="text-default-400">
+                                    &#64;Founder |
+                                    <a class="text-danger" href="/#">sophiacarter.com</a>
+</span>
+<!-- Buttons -->
+<div class="mt-5 flex justify-center gap-2">
+<button class="btn btn-sm bg-primary text-white hover:bg-primary-hover">Message</button>
+<button class="btn border-secondary hover:bg-secondary text-secondary btn-sm hover:text-white">Follow</button>
+</div>
+<!-- Divider -->
+<hr class="border-default-300 my-5 border-dashed"/>
+<!-- Stats -->
+<div class="flex justify-between text-center">
+<div>
+<h5>134</h5>
+<span class="text-default-400">Posts</span>
+</div>
+<div>
+<h5>29.8k</h5>
+<span class="text-default-400">Followers</span>
+</div>
+<div>
+<h5>1125</h5>
+<span class="text-default-400">Followings</span>
+</div>
+</div>
+<!-- Footer -->
+<hr class="border-default-300 mt-5 mb-4 border-dashed"/>
+<div class="text-default-400 flex items-center justify-end gap-1.5 text-xs">
+<i class="iconify tabler--refresh"></i>
+                                    Updated 1 hour ago
+                                </div>
+</div>
+</div>
+<!-- Profile Card 2: Daniel Lee -->
+<div class="card">
+<div class="card-body text-center">
+<!-- Avatar -->
+<img alt="avatar" class="mx-auto size-18 rounded-full" src="/images/users/user-2.jpg"/>
+<!-- Name & Flag -->
+<h5 class="mt-3 text-md flex items-center justify-center gap-1.5">
+<a class="hover:text-primary font-semibold" href="/apps/users/profile">Daniel Lee</a>
+<img alt="US" class="size-4 rounded" src="/images/flags/us.svg"/>
+</h5>
+<!-- Designation & Badge -->
+<span class="text-default-400 text-xs">Product Manager</span>
+<div>
+<span class="badge bg-success text-white my-1.5">Verified</span>
+</div>
+<!-- Bio Line -->
+<span class="text-default-400">
+                                    &#64;danielpm |
+                                    <a class="text-danger" href="/#">daniellee.com</a>
+</span>
+<!-- Buttons -->
+<div class="mt-5 flex justify-center gap-2">
+<button class="btn btn-sm bg-primary text-white hover:bg-primary-hover">Message</button>
+<button class="btn border-secondary hover:bg-secondary text-secondary btn-sm hover:text-white">Follow</button>
+</div>
+<!-- Divider -->
+<hr class="border-default-300 my-5 border-dashed"/>
+<!-- Stats -->
+<div class="flex justify-between text-center">
+<div>
+<h5>98</h5>
+<span class="text-default-400">Posts</span>
+</div>
+<div>
+<h5>12.5k</h5>
+<span class="text-default-400">Followers</span>
+</div>
+<div>
+<h5>860</h5>
+<span class="text-default-400">Followings</span>
+</div>
+</div>
+<!-- Footer -->
+<hr class="border-default-300 mt-5 mb-4 border-dashed"/>
+<div class="text-default-400 flex items-center justify-end gap-1.5 text-xs">
+<i class="iconify tabler--refresh"></i>
+                                    Updated 2 hours ago
+                                </div>
+</div>
+</div>
+<!-- Profile Card 3: Maria Rodriguez -->
+<div class="card">
+<div class="card-body text-center">
+<!-- Avatar -->
+<img alt="avatar" class="mx-auto size-18 rounded-full" src="/images/users/user-3.jpg"/>
+<!-- Name & Flag -->
+<h5 class="mt-3 text-md flex items-center justify-center gap-1.5">
+<a class="hover:text-primary font-semibold" href="/apps/users/profile">Maria Rodriguez</a>
+<img alt="Spain" class="size-4 rounded" src="/images/flags/es.svg"/>
+</h5>
+<!-- Designation & Badge -->
+<span class="text-default-400 text-xs">Marketing Head</span>
+<div>
+<span class="badge bg-info text-white my-1.5">Team Lead</span>
+</div>
+<!-- Bio Line -->
+<span class="text-default-400">
+                                    &#64;maria |
+                                    <a class="text-danger" href="/#">mariaworks.es</a>
+</span>
+<!-- Buttons -->
+<div class="mt-5 flex justify-center gap-2">
+<button class="btn btn-sm bg-primary text-white hover:bg-primary-hover">Message</button>
+<button class="btn border-secondary hover:bg-secondary text-secondary btn-sm hover:text-white">Follow</button>
+</div>
+<!-- Divider -->
+<hr class="border-default-300 my-5 border-dashed"/>
+<!-- Stats -->
+<div class="flex justify-between text-center">
+<div>
+<h5>205</h5>
+<span class="text-default-400">Posts</span>
+</div>
+<div>
+<h5>18.4k</h5>
+<span class="text-default-400">Followers</span>
+</div>
+<div>
+<h5>1432</h5>
+<span class="text-default-400">Followings</span>
+</div>
+</div>
+<!-- Footer -->
+<hr class="border-default-300 mt-5 mb-4 border-dashed"/>
+<div class="text-default-400 flex items-center justify-end gap-1.5 text-xs">
+<i class="iconify tabler--refresh"></i>
+                                    Updated 3 hours ago
+                                </div>
+</div>
+</div>
+<!-- Profile Card 4: Liam Zhang -->
+<div class="card">
+<div class="card-body text-center">
+<!-- Avatar -->
+<img alt="avatar" class="mx-auto size-18 rounded-full" src="/images/users/user-4.jpg"/>
+<!-- Name & Flag -->
+<h5 class="mt-3 text-md flex items-center justify-center gap-1.5">
+<a class="hover:text-primary font-semibold" href="/apps/users/profile">Liam Zhang</a>
+<img alt="China" class="size-4 rounded" src="/images/flags/cn.svg"/>
+</h5>
+<!-- Designation & Badge -->
+<span class="text-default-400 text-xs">Frontend Developer</span>
+<div>
+<span class="badge bg-warning text-white my-1.5">Contributor</span>
+</div>
+<!-- Bio Line -->
+<span class="text-default-400">
+                                    &#64;liamdev |
+                                    <a class="text-danger" href="/#">liamzhang.cn</a>
+</span>
+<!-- Buttons -->
+<div class="mt-5 flex justify-center gap-2">
+<button class="btn btn-sm bg-primary text-white hover:bg-primary-hover">Message</button>
+<button class="btn border-secondary hover:bg-secondary text-secondary btn-sm hover:text-white">Follow</button>
+</div>
+<!-- Divider -->
+<hr class="border-default-300 my-5 border-dashed"/>
+<!-- Stats -->
+<div class="flex justify-between text-center">
+<div>
+<h5>67</h5>
+<span class="text-default-400">Posts</span>
+</div>
+<div>
+<h5>9.3k</h5>
+<span class="text-default-400">Followers</span>
+</div>
+<div>
+<h5>540</h5>
+<span class="text-default-400">Followings</span>
+</div>
+</div>
+<!-- Footer -->
+<hr class="border-default-300 mt-5 mb-4 border-dashed"/>
+<div class="text-default-400 flex items-center justify-end gap-1.5 text-xs">
+<i class="iconify tabler--refresh"></i>
+                                    Updated 10 mins ago
+                                </div>
+</div>
+</div>
+<!-- Profile card 5 : Ethan Wright -->
+<div class="card">
+<div class="card-body text-center">
+<!-- Avatar -->
+<img alt="avatar" class="mx-auto size-18 rounded-full" src="/images/users/user-7.jpg"/>
+<!-- Name & Flag -->
+<h5 class="mt-3 text-md flex items-center justify-center gap-1.5">
+<a class="hover:text-primary font-semibold" href="/apps/users/profile">Ethan Wright</a>
+<img alt="Canada" class="size-4 rounded" src="/images/flags/ca.svg"/>
+</h5>
+<!-- Designation & Badge -->
+<span class="text-default-400 text-xs">Senior Backend Engineer</span>
+<div>
+<span class="badge bg-primary text-white my-1.5">Moderator</span>
+</div>
+<!-- Bio Line -->
+<span class="text-default-400">
+                                    &#64;DevOps |
+                                    <a class="text-danger" href="/#">ethanwright.dev</a>
+</span>
+<!-- Buttons -->
+<div class="mt-5 flex justify-center gap-2">
+<button class="btn btn-sm bg-primary text-white hover:bg-primary-hover">Message</button>
+<button class="btn border-secondary hover:bg-secondary text-secondary btn-sm hover:text-white">Follow</button>
+</div>
+<!-- Divider -->
+<hr class="border-default-300 my-5 border-dashed"/>
+<!-- Stats -->
+<div class="flex justify-between text-center">
+<div>
+<h5>89</h5>
+<span class="text-default-400">Posts</span>
+</div>
+<div>
+<h5>16.4k</h5>
+<span class="text-default-400">Followers</span>
+</div>
+<div>
+<h5>734</h5>
+<span class="text-default-400">Followings</span>
+</div>
+</div>
+<!-- Footer -->
+<hr class="border-default-300 mt-5 mb-4 border-dashed"/>
+<div class="text-default-400 flex items-center justify-end gap-1.5 text-xs">
+<i class="iconify tabler--refresh"></i>
+                                    Updated 45 mins ago
+                                </div>
+</div>
+</div>
+<!-- Profile card 6 : Isabella Moretti -->
+<div class="card">
+<div class="card-body text-center">
+<!-- Avatar -->
+<img alt="avatar" class="mx-auto size-18 rounded-full" src="/images/users/user-8.jpg"/>
+<!-- Name & Flag -->
+<h5 class="mt-3 text-md flex items-center justify-center gap-1.5">
+<a class="hover:text-primary font-semibold" href="/apps/users/profile">Isabella Moretti</a>
+<img alt="Italy" class="size-4 rounded" src="/images/flags/it.svg"/>
+</h5>
+<!-- Designation & Badge -->
+<span class="text-default-400 text-xs">Content Strategist</span>
+<div>
+<span class="badge bg-danger text-white my-1.5">Top Creator</span>
+</div>
+<!-- Bio Line -->
+<span class="text-default-400">
+                                    &#64;isamoretti |
+                                    <a class="text-danger" href="/#">moretti.io</a>
+</span>
+<!-- Buttons -->
+<div class="mt-5 flex justify-center gap-2">
+<button class="btn btn-sm bg-primary text-white hover:bg-primary-hover">Message</button>
+<button class="btn border-secondary hover:bg-secondary text-secondary btn-sm hover:text-white">Follow</button>
+</div>
+<!-- Divider -->
+<hr class="border-default-300 my-5 border-dashed"/>
+<!-- Stats -->
+<div class="flex justify-between text-center">
+<div>
+<h5>162</h5>
+<span class="text-default-400">Posts</span>
+</div>
+<div>
+<h5>24.7k</h5>
+<span class="text-default-400">Followers</span>
+</div>
+<div>
+<h5>921</h5>
+<span class="text-default-400">Followings</span>
+</div>
+</div>
+<!-- Footer -->
+<hr class="border-default-300 mt-5 mb-4 border-dashed"/>
+<div class="text-default-400 flex items-center justify-end gap-1.5 text-xs">
+<i class="iconify tabler--refresh"></i>
+                                    Updated 2 hours ago
+                                </div>
+</div>
+</div>
+<!-- Profile card 7 : Kenji Tanaka -->
+<div class="card">
+<div class="card-body text-center">
+<!-- Avatar -->
+<img alt="avatar" class="mx-auto size-18 rounded-full" src="/images/users/user-9.jpg"/>
+<!-- Name & Flag -->
+<h5 class="mt-3 text-md flex items-center justify-center gap-1.5">
+<a class="hover:text-primary font-semibold" href="/apps/users/profile">Kenji Tanaka</a>
+<img alt="Japan" class="size-4 rounded" src="/images/flags/jp.svg"/>
+</h5>
+<!-- Designation & Badge -->
+<span class="text-default-400 text-xs">Full Stack Developer</span>
+<div>
+<span class="badge bg-info text-white my-1.5">Contributor</span>
+</div>
+<!-- Bio Line -->
+<span class="text-default-400">
+                                    &#64;kenjicode |
+                                    <a class="text-danger" href="/#">kenjitanaka.dev</a>
+</span>
+<!-- Buttons -->
+<div class="mt-5 flex justify-center gap-2">
+<button class="btn btn-sm bg-primary text-white hover:bg-primary-hover">Message</button>
+<button class="btn border-secondary hover:bg-secondary text-secondary btn-sm hover:text-white">Follow</button>
+</div>
+<!-- Divider -->
+<hr class="border-default-300 my-5 border-dashed"/>
+<!-- Stats -->
+<div class="flex justify-between text-center">
+<div>
+<h5>113</h5>
+<span class="text-default-400">Posts</span>
+</div>
+<div>
+<h5>13.9k</h5>
+<span class="text-default-400">Followers</span>
+</div>
+<div>
+<h5>678</h5>
+<span class="text-default-400">Followings</span>
+</div>
+</div>
+<!-- Footer -->
+<hr class="border-default-300 mt-5 mb-4 border-dashed"/>
+<div class="text-default-400 flex items-center justify-end gap-1.5 text-xs">
+<i class="iconify tabler--refresh"></i>
+                                    Updated 30 mins ago
+                                </div>
+</div>
+</div>
+<!-- Profile card 8 : Amira El-Sayed -->
+<div class="card">
+<div class="card-body text-center">
+<!-- Avatar -->
+<img alt="avatar" class="mx-auto size-18 rounded-full" src="/images/users/user-10.jpg"/>
+<!-- Name & Flag -->
+<h5 class="mt-3 text-md flex items-center justify-center gap-1.5">
+<a class="hover:text-primary font-semibold" href="/apps/users/profile">Amira El-Sayed</a>
+<img alt="Egypt" class="size-4 rounded" src="/images/flags/eg.svg"/>
+</h5>
+<!-- Designation & Badge -->
+<span class="text-default-400 text-xs">Data Scientist</span>
+<div>
+<span class="badge bg-warning text-white my-1.5">Analyst</span>
+</div>
+<!-- Bio Line -->
+<span class="text-default-400">
+                                    &#64;amira.codes |
+                                    <a class="text-danger" href="/#">amira-ai.tech</a>
+</span>
+<!-- Buttons -->
+<div class="mt-5 flex justify-center gap-2">
+<button class="btn btn-sm bg-primary text-white hover:bg-primary-hover">Message</button>
+<button class="btn border-secondary hover:bg-secondary text-secondary btn-sm hover:text-white">Follow</button>
+</div>
+<!-- Divider -->
+<hr class="border-default-300 my-5 border-dashed"/>
+<!-- Stats -->
+<div class="flex justify-between text-center">
+<div>
+<h5>176</h5>
+<span class="text-default-400">Posts</span>
+</div>
+<div>
+<h5>21.1k</h5>
+<span class="text-default-400">Followers</span>
+</div>
+<div>
+<h5>998</h5>
+<span class="text-default-400">Followings</span>
+</div>
+</div>
+<!-- Footer -->
+<hr class="border-default-300 mt-5 mb-4 border-dashed"/>
+<div class="text-default-400 flex items-center justify-end gap-1.5 text-xs">
+<i class="iconify tabler--refresh"></i>
+                                    Updated 20 mins ago
+                                </div>
+</div>
+</div>
+</div>
+<div class="mt-5">
+<nav aria-label="Pagination" class="mx-auto flex items-center justify-center gap-1.5">
+<button aria-label="Previous" class="btn btn-icon bg-card border-default-300 hover:bg-default-50 hover:text-primary rounded-full" type="button">
+<span>«</span>
+</button>
+<button class="btn btn-icon bg-primary rounded-full text-white" type="button">1</button>
+<button class="btn btn-icon bg-card hover:bg-default-50 border-default-300 hover:text-primary rounded-full" type="button">2</button>
+<button class="btn btn-icon bg-card hover:bg-default-50 border-default-300 hover:text-primary rounded-full" type="button">3</button>
+<button class="btn btn-icon bg-card hover:bg-default-50 border-default-300 hover:text-primary rounded-full" type="button">4</button>
+<button class="btn btn-icon bg-card hover:bg-default-50 border-default-300 hover:text-primary rounded-full" type="button">5</button>
+<button aria-label="Next" class="btn btn-icon bg-card border-default-300 hover:bg-default-50 hover:text-primary rounded-full" type="button">
+<span>»</span>
+</button>
+</nav>
+</div>
+</div>
+</main>
+
+            @await Html.PartialAsync("~/Pages/Shared/Partials/_Footer.cshtml")
+        </div>
+<!-- End Page content -->
+</div>
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_FooterScripts.cshtml")
+
+
+@section Scripts {
+
+}

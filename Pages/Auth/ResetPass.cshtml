@@ -1,0 +1,82 @@
+@page "/auth/reset-pass"
+@model Starterkit.Pages.Auth.ResetPassModel
+
+
+@{
+    ViewBag.title = "Reset Password";
+}
+
+
+@section Styles {
+
+}
+
+
+<!-- Start Page Content here -->
+<div class="flex min-h-screen items-center p-12.5">
+<div class="container">
+<div class="flex justify-center px-2.5">
+<div class="2xl:w-4/10 md:w-1/2 sm:w-2/3 w-full">
+<div class="absolute end-0 top-0">
+<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+</div>
+<div class="absolute start-0 bottom-0 rotate-180">
+<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+</div>
+<div class="card p-7.5 rounded-2xl">
+<!-- Auth Brand Logo -->
+<div class="mb-3 flex flex-col items-center justify-center text-center">
+<a class="auth-logo" href="/">
+<img alt="logo" class="flex dark:hidden" src="/images/logo-black.png"/>
+<img alt="dark logo" class="hidden dark:flex" src="/images/logo.png"/>
+</a>
+<p class="text-default-400 mx-auto mt-6 mb-4 w-full lg:w-3/4">Vnesite vaš e-poštni naslov in poslali vam bomo povezavo za ponastavitev gesla.</p>
+</div>
+<form method="post">
+@Html.AntiForgeryToken()
+@if (Model.StatusMessage != null)
+{
+    <div class="mb-4 rounded-lg bg-green-50 p-3 text-sm text-green-700 dark:bg-green-900/30 dark:text-green-400">
+        @Model.StatusMessage
+    </div>
+}
+<div asp-validation-summary="ModelOnly" class="mb-4 text-sm text-danger"></div>
+<div class="mb-5">
+<label class="form-label" for="userEmail">
+                                    E-poštni naslov
+                                    <span class="text-danger">*</span>
+</label>
+<div class="input-group">
+<input asp-for="Input.Email" class="form-input" id="userEmail" placeholder="you@example.com" type="email"/>
+</div>
+</div>
+<div>
+<button class="btn bg-primary w-full py-3 font-semibold text-white hover:bg-primary-hover" type="submit">Pošlji zahtevek</button>
+</div>
+</form>
+<p class="text-default-400 mt-7.5 text-center">
+                            Nazaj na
+                            <a class="text-primary font-semibold underline underline-offset-4" href="/auth/sign-in">Prijavo</a>
+</p>
+</div>
+<!-- Auth Footer -->
+<p class="text-default-400 mt-7.5 text-center">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        Paces - by
+                        <span>Coderthemes</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+<!-- End Page content -->
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+
+@section Scripts {
+
+}

@@ -1,0 +1,34 @@
+## .NET / ASP.NET Core
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.vscode/
+*.swp
+
+## Publish output
+publish/
+out/
+
+## Logs
+*.log
+logs/
+
+## User secrets & local config
+appsettings.Development.json
+secrets.json
+
+## Node / npm
+node_modules/
+
+## TUS temporary uploads
+tus-store/
+
+## Uploaded files (user data — not in source control)
+wwwroot/uploads/
+
+## OS
+Thumbs.db
+.DS_Store
+desktop.ini

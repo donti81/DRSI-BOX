@@ -1,0 +1,272 @@
+@page "/apps/users/roles"
+@model Paces.Pages.Apps.Users.RolesModel
+
+
+@{
+    ViewBag.title = "Roles";
+    ViewBag.subtitle = "Pages";
+}
+
+
+@section Styles {
+
+}
+
+
+<div class="wrapper">
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Topbar.cshtml")
+
+        @await Html.PartialAsync("~/Pages/Shared/Partials/_Sidenav.cshtml")
+
+        <!-- Start Page Content here -->
+<div class="page-content">
+<main>
+<div class="mt-5"></div>
+<div class="container-fluid">
+<div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+<div>
+<h4 class="page-main-title mb-1.25">Manage Roles</h4>
+<p class="text-default-400">Manage roles for smoother operations and secure access.</p>
+</div>
+<div>
+<button aria-expanded="false" aria-haspopup="dialog" class="btn bg-success text-white hover:bg-success-hover" data-hs-overlay="#addRoleModal" type="button">
+<i class="iconify tabler--plus"></i>
+                                Add New Role
+                            </button>
+</div>
+</div>
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+<div class="alert alert-success mb-4">@Model.StatusMessage</div>
+}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-base mb-base">
+@foreach (var role in Model.Roles)
+{
+<div class="card">
+<div class="absolute end-0 top-0 size-45">
+<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+</div>
+<div class="card-body">
+<div class="mb-7.5 flex items-start">
+<div>
+<div class="bg-primary/15 text-primary flex size-12 items-center justify-center rounded-md">
+<i class="iconify tabler--shield-lock text-2xl"></i>
+</div>
+</div>
+<div class="ms-6">
+<h5 class="mb-1.25 text-sm">@role.Name</h5>
+<p class="text-default-400">Sistemska vloga za nadzor dostopa.</p>
+</div>
+</div>
+<p class="text-default-400 mb-3 text-sm">Skupaj @role.UserCount uporabnikov</p>
+<div class="flex justify-between">
+<span class="text-default-400 flex items-center gap-1.5 text-xs">
+<i class="iconify tabler--users"></i>
+@role.UserCount uporabnikov
+</span>
+<div>
+<a class="btn btn-sm border-primary text-primary hover:bg-primary rounded-full border hover:text-white" href="/apps/users/role-details?role=@role.Name">Details</a>
+</div>
+</div>
+</div>
+</div>
+}
+</div>
+<div class="card" data-table="" data-table-rows-per-page="8">
+<div class="card-header">
+<div class="flex gap-2">
+<div class="input-icon-group">
+<i class="iconify tabler--search input-icon"></i>
+<input class="form-input" placeholder="Search Users..." type="search"/>
+</div>
+<button class="btn bg-danger text-white hover:bg-danger-hover hidden" data-table-delete-selected="">Delete</button>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<div class="items-center gap-3 md:flex">
+<span class="me-3 font-semibold text-nowrap">Filter By:</span>
+<!-- Role Type Filter -->
+<div class="input-icon-group">
+<i class="iconify tabler--user-hexagon input-icon"></i>
+<select class="form-select" data-table-filter="roles">
+<option value="">Role</option>
+@foreach (var role in Model.Roles)
+{
+<option value="@role.Name">@role.Name</option>
+}
+</select>
+</div>
+</div>
+<!-- Status Filter -->
+<div class="input-icon-group">
+<i class="iconify tabler--user-check input-icon"></i>
+<select class="form-select" data-table-filter="status">
+<option value="">Status</option>
+<option value="Active">Active</option>
+<option value="Inactive">Inactive</option>
+<option value="Suspended">Suspended</option>
+</select>
+</div>
+<!-- Records Per Page -->
+<div>
+<select class="form-select" data-table-set-rows-per-page="">
+<option value="5">5</option>
+<option value="8">8</option>
+<option value="10">10</option>
+<option value="15">15</option>
+<option value="20">20</option>
+</select>
+</div>
+<button aria-expanded="false" aria-haspopup="dialog" class="btn bg-secondary text-white hover:bg-secondary-hover" data-hs-overlay="#assignRoleModal" type="button">Dodeli vlogo</button>
+</div>
+</div>
+<div class="table-wrapper">
+<table class="table table-hover">
+<thead class="thead-sm">
+<tr class="bg-light/25 text-2xs uppercase">
+<th class="w-[1%]">
+<input class="form-checkbox form-checkbox-light size-4.5" data-table-select-all="" id="select-all-files" type="checkbox"/>
+</th>
+<th data-table-sort="">ID</th>
+<th data-table-sort="user">User</th>
+<th data-column="roles" data-table-sort="">Role</th>
+<th data-table-sort="">Last Updated</th>
+<th data-column="status" data-table-sort="">Status</th>
+<th class="text-center">Actions</th>
+</tr>
+</thead>
+<tbody>
+@foreach (var user in Model.AllUsers)
+{
+var role = Model.UserRoles.TryGetValue(user.Id, out var r) ? r : "";
+<tr>
+<td><input class="form-checkbox form-checkbox-light size-4.5" type="checkbox" value="option"/></td>
+<td><h5><a class="hover:text-primary" href="/#">@user.Id[..8].ToUpper()</a></h5></td>
+<td>
+<div class="flex items-center gap-3">
+<div class="bg-primary/15 text-primary flex size-8 items-center justify-center rounded-full text-xs font-bold">
+@((user.FullName ?? user.Email ?? "?")[..1].ToUpper())
+</div>
+<div>
+<h5><a class="hover:text-primary" data-sort="user" href="/#!">@(user.FullName ?? user.Email)</a></h5>
+<p class="text-default-400 text-xs">@user.Email</p>
+</div>
+</div>
+</td>
+<td data-column="roles">@role</td>
+<td>—</td>
+<td data-column="status"><span class="badge badge-label bg-success/15 text-success">Active</span></td>
+<td>
+<div class="flex justify-center gap-1.25">
+<button class="btn btn-icon btn-sm border border-default-300 hover:border-default-400"
+        data-hs-overlay="#assignRoleModal"
+        onclick="setAssignRole('@user.Id', '@role')"
+        type="button">
+<i class="iconify tabler--edit text-base"></i>
+</button>
+</div>
+</td>
+</tr>
+}
+</tbody>
+</table>
+</div>
+<div class="card-footer">
+<div data-table-pagination-info="roles"></div>
+<div data-table-pagination=""></div>
+</div>
+</div>
+</div>
+</main>
+
+            @await Html.PartialAsync("~/Pages/Shared/Partials/_Footer.cshtml")
+
+            <div aria-labelledby="addRoleModalLabel" class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed start-0 top-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto" id="addRoleModal" role="dialog" tabindex="-1">
+<div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 m-3 flex max-w-sm scale-95 items-center opacity-0 transition-all duration-200 ease-in-out md:mx-auto md:w-full md:max-w-2xl lg:max-w-3xl">
+<div class="card pointer-events-auto flex w-full flex-col">
+<div class="card-header p-5">
+<h3 class="text-sm" id="addRoleModalLabel">Add New Role</h3>
+<button aria-label="Close" data-hs-overlay="#addRoleModal" type="button">
+<i class="iconify tabler--x text-xl"></i>
+</button>
+</div>
+<form method="post" asp-page-handler="AddRole">
+@Html.AntiForgeryToken()
+<div class="card-body overflow-y-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="md:col-span-2">
+<label class="form-label" for="roleName">Role Name</label>
+<input class="form-input" id="roleName" name="NewRoleName" placeholder="e.g. Moderator, Reviewer" required="" type="text"/>
+</div>
+<div>
+<label class="form-label" for="roleDescription">Description</label>
+<input class="form-input" id="roleDescription" placeholder="Brief description" type="text"/>
+</div>
+<div>
+<label class="form-label" for="roleIcon">Role Icon</label>
+<input class="form-input" id="roleIcon" placeholder="e.g. shield, briefcase" type="text"/>
+</div>
+</div>
+</div>
+<div class="border-default-300 flex items-center justify-end gap-x-2 border-t p-4">
+<button class="btn bg-light hover:text-primary" data-hs-overlay="#addRoleModal" type="button">Cancel</button>
+<button class="btn bg-primary text-white hover:bg-primary-hover" type="submit">Add Role</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<div aria-labelledby="assignRoleModalLabel" class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed start-0 top-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto" id="assignRoleModal" role="dialog" tabindex="-1">
+<div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 m-3 flex max-w-sm scale-95 items-center opacity-0 transition-all duration-200 ease-in-out md:mx-auto md:w-full md:max-w-lg">
+<div class="card pointer-events-auto flex w-full flex-col">
+<div class="card-header p-5">
+<h3 class="text-sm" id="assignRoleModalLabel">Dodeli vlogo</h3>
+<button aria-label="Close" data-hs-overlay="#assignRoleModal" type="button">
+<i class="iconify tabler--x text-xl"></i>
+</button>
+</div>
+<form method="post" asp-page-handler="AssignRole">
+@Html.AntiForgeryToken()
+<input type="hidden" name="TargetUserId" id="assignUserId"/>
+<div class="card-body">
+<div>
+<label class="form-label">Vloga</label>
+<select class="form-select" name="TargetRole" id="assignRoleSelect">
+<option value="">(brez vloge)</option>
+@foreach (var role in Model.Roles)
+{
+<option value="@role.Name">@role.Name</option>
+}
+</select>
+</div>
+</div>
+<div class="border-default-300 flex items-center justify-end gap-x-2 border-t p-4">
+<button class="btn bg-light hover:text-primary" data-hs-overlay="#assignRoleModal" type="button">Prekliči</button>
+<button class="btn bg-primary text-white hover:bg-primary-hover" type="submit">Shrani</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- End Page content -->
+</div>
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_FooterScripts.cshtml")
+
+    <!-- Custom table -->
+
+
+
+@section Scripts {
+<script src="/js/pages/custom-table.js"></script>
+<script>
+function setAssignRole(userId, currentRole) {
+    document.getElementById('assignUserId').value = userId;
+    var sel = document.getElementById('assignRoleSelect');
+    for (var i = 0; i < sel.options.length; i++) {
+        sel.options[i].selected = sel.options[i].value === currentRole;
+    }
+}
+</script>
+}

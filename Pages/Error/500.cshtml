@@ -1,0 +1,65 @@
+@page "/error/500"
+@model Starterkit.Pages.Error.Error500Model
+
+
+@{
+    ViewBag.title = "500 Error";
+}
+
+
+@section Styles {
+
+}
+
+
+<!-- Start Page Content here -->
+<div class="flex min-h-screen items-center">
+<div class="container">
+<div class="flex justify-center lg:p-0 p-12.5">
+<div class="2xl:w-4/10 md:w-1/2 sm:w-2/3 w-full">
+<div class="absolute end-0 top-0">
+<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+</div>
+<div class="absolute start-0 bottom-0 rotate-180">
+<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+</div>
+<div class="card rounded-2xl">
+<div class="card-body p-7.5">
+<div class="mb-3 flex flex-col items-center justify-center text-center">
+<a class="auth-logo" href="/">
+<img alt="logo" class="flex dark:hidden" src="/images/logo-black.png"/>
+<img alt="dark logo" class="hidden dark:flex" src="/images/logo.png"/>
+</a>
+</div>
+<div class="p-9 text-center">
+<div class="from-primary my-4 bg-linear-to-r to-danger bg-clip-text text-7xl font-bold text-transparent">500</div>
+<h3 class="mb-2 text-xl font-bold uppercase">Server Error</h3>
+<p class="text-default-400">We ran into an issue while processing your request. Please try again in a moment.</p>
+<div class="mt-8 flex items-center justify-center gap-1.5">
+<button class="btn bg-primary text-white hover:bg-primary-hover">Try Again</button>
+<button class="btn border-info text-info hover:bg-info hover:text-white">Get Support</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Auth Footer -->
+<p class="text-default-400 mt-7.5 text-center">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        Paces - by
+                        <span>Coderthemes</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+<!-- End Page content -->
+
+    @await Html.PartialAsync("~/Pages/Shared/Partials/_Customizer.cshtml")
+
+
+@section Scripts {
+
+}
