@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const filepondServer = {
             process: {
-                url: "/form/fileuploads?handler=Upload",
+                url: (window.__pathBase || '') + "/form/fileuploads?handler=Upload",
                 method: "POST",
                 headers: {
                     RequestVerificationToken: getCsrfToken(),
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
 
         uppy.use(Tus, {
-            endpoint: "/tus",
+            endpoint: (window.__pathBase || '') + "/tus",
             chunkSize: 10 * 1024 * 1024,
             retryDelays: [0, 1000, 3000, 5000],
             removeFingerprintOnSuccess: true,
@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
             fd.append("recipients", recipientsEl?.value ?? "")
 
             try {
-                const res = await fetch("/form/fileuploads?handler=SendNotification", {
+                const res = await fetch((window.__pathBase || '') + "/form/fileuploads?handler=SendNotification", {
                     method: "POST",
                     headers: { RequestVerificationToken: getCsrfToken() },
                     body: fd,

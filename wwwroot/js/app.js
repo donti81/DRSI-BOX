@@ -916,7 +916,7 @@ class Plugins {
 class I18nManager {
   constructor({
                 defaultLang = 'en',
-                langPath = '/data/translations/',
+                langPath = (window.__pathBase || '') + '/data/translations/',
                 langImageSelector = '#selected-language-image',
                 langCodeSelector = '#selected-language-code',
                 translationKeySelector = '[data-lang]',

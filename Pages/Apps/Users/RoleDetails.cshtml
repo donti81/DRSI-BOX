@@ -1,4 +1,4 @@
-@page "/apps/users/role-details"
+﻿@page "/apps/users/role-details"
 @model Paces.Pages.Apps.Users.RoleDetailsModel
 
 
@@ -29,7 +29,7 @@
 <p class="text-default-400">Upravljanje vloge in njenih uporabnikov.</p>
 </div>
 <div>
-<a class="btn bg-light hover:text-primary" href="/apps/users/roles">
+<a class="btn bg-light hover:text-primary" href="apps/users/roles">
 <i class="iconify tabler--arrow-left"></i> Nazaj
 </a>
 </div>
@@ -42,7 +42,7 @@
 <div class="col-span-1">
 <div class="card">
 <div class="absolute top-0 end-0 size-45">
-<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+<img alt="auth-card-bg" src="images/auth-card-bg.svg"/>
 </div>
 <div class="card-body">
 <div class="flex items-start mb-7.5">
@@ -125,14 +125,14 @@
 {
 <tr>
 <td><input class="form-checkbox form-checkbox-light size-4.5" type="checkbox" value="option"/></td>
-<td><h5><a class="text-sm font-semibold hover:text-primary" href="/#!">@user.Id[..8].ToUpper()</a></h5></td>
+<td><h5><a class="text-sm font-semibold hover:text-primary" href="#!">@user.Id[..8].ToUpper()</a></h5></td>
 <td>
 <div class="flex gap-3 items-center">
 <div class="bg-primary/15 text-primary flex size-8 items-center justify-center rounded-full text-xs font-bold">
 @((user.FullName ?? user.Email ?? "?")[..1].ToUpper())
 </div>
 <div>
-<h5><a class="hover:text-primary" href="/#!">@(user.FullName ?? user.Email)</a></h5>
+<h5><a class="hover:text-primary" href="#!">@(user.FullName ?? user.Email)</a></h5>
 <p class="text-default-400 text-xs">@user.Email</p>
 </div>
 </div>
@@ -212,5 +212,5 @@
 
 
 @section Scripts {
-<script src="/js/pages/custom-table.js"></script>
+<script src="js/pages/custom-table.js"></script>
 }

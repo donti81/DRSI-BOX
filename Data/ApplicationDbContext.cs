@@ -30,6 +30,10 @@ namespace DRSIBOX.Data
                 b.Property(u => u.NormalizedUserName).HasMaxLength(128);
                 b.Property(u => u.Email).HasMaxLength(128);
                 b.Property(u => u.NormalizedEmail).HasMaxLength(128);
+                // Oracle stores TIMESTAMP without timezone; convert to/from DateTimeOffset
+                b.Property(u => u.LockoutEnd).HasConversion(
+                    v => v.HasValue ? (DateTime?)v.Value.UtcDateTime : null,
+                    v => v.HasValue ? (DateTimeOffset?)new DateTimeOffset(DateTime.SpecifyKind(v.Value, DateTimeKind.Utc)) : null);
             });
 
             builder.Entity<IdentityRole>(b =>

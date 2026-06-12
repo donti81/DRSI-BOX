@@ -17,6 +17,7 @@ namespace DRSIBOX.Pages.Apps
         private readonly IUploadNotificationService _notifications;
         private readonly IWebHostEnvironment _env;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUploadPathResolver _uploadPaths;
 
         [BindProperty(SupportsGet = true)]
         public string? View { get; set; }
@@ -33,13 +34,15 @@ namespace DRSIBOX.Pages.Apps
             IDownloadLogService downloadLog,
             IUploadNotificationService notifications,
             IWebHostEnvironment env,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IUploadPathResolver uploadPaths)
         {
             _uploadLog = uploadLog;
             _downloadLog = downloadLog;
             _notifications = notifications;
             _env = env;
             _userManager = userManager;
+            _uploadPaths = uploadPaths;
         }
 
         public async Task OnGetAsync()
@@ -85,10 +88,7 @@ namespace DRSIBOX.Pages.Apps
             }
         }
 
-        private string ResolveFilePath(UploadLog file) =>
-            string.IsNullOrEmpty(file.Folder)
-                ? Path.Combine(_env.WebRootPath, "uploads", file.FileName)
-                : Path.Combine(_env.WebRootPath, "uploads", file.Folder, file.FileName);
+        private string ResolveFilePath(UploadLog file) => _uploadPaths.Resolve(file);
 
         public async Task<IActionResult> OnGetDownloadAsync(long id)
         {
@@ -158,7 +158,7 @@ namespace DRSIBOX.Pages.Apps
 
             await _uploadLog.SoftDeleteAsync(id, User.Identity?.Name);
 
-            var path = Path.Combine(_env.WebRootPath, "uploads", file.FileName);
+            var path = ResolveFilePath(file);
             if (System.IO.File.Exists(path))
                 System.IO.File.Delete(path);
 

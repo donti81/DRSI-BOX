@@ -56,11 +56,11 @@
 <div class="card">
 <div aria-label="Sidebar" class="hs-overlay hs-overlay-open:translate-x-0 rounded fixed start-0 top-0 bottom-0 z-50 h-full w-62.5 -translate-x-full transform bg-card transition-all duration-300 [--auto-close:lg] lg:static lg:end-auto lg:bottom-0 lg:block! lg:translate-x-0" id="fileSidebaroffcanvas" role="dialog" tabindex="-1">
 <div class="card-body h-full" data-simplebar="">
-<a class="btn w-full bg-danger text-white hover:bg-danger-hover" href="/form/fileuploads">Upload Files</a>
+<a class="btn w-full bg-danger text-white hover:bg-danger-hover" href="form/fileuploads">Upload Files</a>
 <div class="mt-5">
 <!-- Menu Links -->
 <div class="flex flex-col">
-<a class="@(Model.View == null || (Model.View != "downloads" && Model.View != "trash" && Model.View != "recent" && Model.View != "notifications") ? "bg-default-100" : "hover:bg-default-100") font-medium flex items-center gap-2 rounded px-3 py-2 transition" href="/apps/file-manager">
+<a class="@(Model.View == null || (Model.View != "downloads" && Model.View != "trash" && Model.View != "recent" && Model.View != "notifications") ? "bg-default-100" : "hover:bg-default-100") font-medium flex items-center gap-2 rounded px-3 py-2 transition" href="apps/file-manager">
 <i class="iconify tabler--folder text-base align-middle"></i>
 <span class="align-middle">My Files</span>
 @if (Model.Files.Count > 0)
@@ -68,7 +68,7 @@
 <span class="ms-auto badge text-2xs bg-danger/15 text-danger font-semibold">@Model.Files.Count</span>
 }
 </a>
-<a class="@(Model.View == "notifications" ? "bg-default-100" : "hover:bg-default-100") font-medium flex items-center gap-2 rounded px-3 py-2 transition" href="/apps/file-manager?view=notifications">
+<a class="@(Model.View == "notifications" ? "bg-default-100" : "hover:bg-default-100") font-medium flex items-center gap-2 rounded px-3 py-2 transition" href="apps/file-manager?view=notifications">
 <i class="iconify tabler--mail text-base align-middle text-default-700"></i>
 <span class="align-middle">Poslana sporočila</span>
 @if (Model.Notifications.Count > 0)
@@ -80,7 +80,7 @@
 <i class="iconify tabler--share text-base align-middle text-default-700"></i>
 <span class="align-middle">Shared with Me</span>
 </a>
-<a class="@(Model.View == "recent" ? "bg-default-100" : "hover:bg-default-100") font-medium flex items-center gap-2 rounded px-3 py-2 transition" href="/apps/file-manager?view=recent">
+<a class="@(Model.View == "recent" ? "bg-default-100" : "hover:bg-default-100") font-medium flex items-center gap-2 rounded px-3 py-2 transition" href="apps/file-manager?view=recent">
 <i class="iconify tabler--clock text-base align-middle text-default-700"></i>
 <span class="align-middle">Recent</span>
 </a>
@@ -88,7 +88,7 @@
 <i class="iconify tabler--star text-base align-middle text-default-700"></i>
 <span class="align-middle">Favourites</span>
 </a>
-<a class="@(Model.View == "downloads" ? "bg-default-100" : "hover:bg-default-100") font-medium flex items-center gap-2 rounded px-3 py-2 transition" href="/apps/file-manager?view=downloads">
+<a class="@(Model.View == "downloads" ? "bg-default-100" : "hover:bg-default-100") font-medium flex items-center gap-2 rounded px-3 py-2 transition" href="apps/file-manager?view=downloads">
 <i class="iconify tabler--download text-base align-middle text-default-700"></i>
 <span class="align-middle">Downloads</span>
 @if (Model.DownloadedFiles.Count > 0)
@@ -96,7 +96,7 @@
 <span class="ms-auto badge text-2xs bg-primary/15 text-primary font-semibold">@Model.DownloadedFiles.Count</span>
 }
 </a>
-<a class="@(Model.View == "trash" ? "bg-default-100" : "hover:bg-default-100") font-medium flex items-center gap-2 rounded px-3 py-2 transition" href="/apps/file-manager?view=trash">
+<a class="@(Model.View == "trash" ? "bg-default-100" : "hover:bg-default-100") font-medium flex items-center gap-2 rounded px-3 py-2 transition" href="apps/file-manager?view=trash">
 <i class="iconify tabler--trash text-base align-middle text-default-700"></i>
 <span class="align-middle">Trash</span>
 @if (Model.DeletedFiles.Count > 0)
@@ -306,7 +306,7 @@ else if (Model.View == "downloads")
                             </div>
                             <div>
                                 <h5 class="mb-1.25">
-                                    <a class="hover:text-primary" href="/apps/file-manager?handler=Download&id=@file.UploadLogId">@file.OriginalName</a>
+                                    <a class="hover:text-primary" href="apps/file-manager?handler=Download&id=@file.UploadLogId">@file.OriginalName</a>
                                 </h5>
                                 <p class="text-default-400 text-xs">@FormatSize(file.FileSize)</p>
                             </div>
@@ -323,7 +323,7 @@ else if (Model.View == "downloads")
                     <td>
                         <div class="flex items-center justify-end gap-3">
                             <a class="btn btn-sm btn-icon border-default-300"
-                               href="/apps/file-manager?handler=Download&id=@file.UploadLogId"
+                               href="apps/file-manager?handler=Download&id=@file.UploadLogId"
                                title="Download">
                                 <i class="iconify tabler--download text-default-600"></i>
                             </a>
@@ -440,7 +440,7 @@ else
                             </div>
                             <div>
                                 <h5 class="mb-1.25">
-                                    <a class="hover:text-primary" data-sort="name" href="/apps/file-manager?handler=Download&id=@file.Id">@file.OriginalName</a>
+                                    <a class="hover:text-primary" data-sort="name" href="apps/file-manager?handler=Download&id=@file.Id">@file.OriginalName</a>
                                 </h5>
                                 <p class="text-default-400 text-xs">@FormatSize(file.FileSize)</p>
                             </div>
@@ -473,7 +473,7 @@ else
                                 </button>
                                 <div aria-orientation="vertical" class="hs-dropdown-menu" role="menu">
                                     <div class="space-y-0.5">
-                                        <a class="dropdown-item" href="/apps/file-manager?handler=Download&id=@file.Id">
+                                        <a class="dropdown-item" href="apps/file-manager?handler=Download&id=@file.Id">
                                             <i class="iconify tabler--download"></i> Download
                                         </a>
                                         <form method="post" asp-page-handler="Delete">
@@ -595,7 +595,7 @@ else
 </div>
 
 @section Scripts {
-<script src="/js/pages/custom-table.js"></script>
+<script src="js/pages/custom-table.js"></script>
 <script>
 document.querySelectorAll(".notif-row").forEach(row => {
     row.addEventListener("click", () => {

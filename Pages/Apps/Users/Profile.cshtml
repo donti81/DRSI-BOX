@@ -1,4 +1,4 @@
-@page "/apps/users/profile"
+﻿@page "/apps/users/profile"
 @model Paces.Pages.Apps.Users.ProfileModel
 
 
@@ -44,11 +44,11 @@
 <div class="card-body">
 <div class="flex justify-between items-center mb-7.5">
 <div class="flex items-center gap-base">
-<img alt="avatar" class="size-18 rounded-full object-cover" src="/images/users/user-1.jpg"/>
+<img alt="avatar" class="size-18 rounded-full object-cover" src="images/users/user-1.jpg"/>
 <div>
 <div class="flex items-center gap-3">
-<h4 class="text-md"><a href="/#!">David Dev</a></h4>
-<img alt="US" class="rounded-full size-4" src="/images/flags/us.svg"/>
+<h4 class="text-md"><a href="#!">David Dev</a></h4>
+<img alt="US" class="rounded-full size-4" src="images/flags/us.svg"/>
 </div>
 <p class="text-default-400 text-sm mb-3">Senior Developer</p>
 <span class="badge badge-label bg-light">Team Lead</span>
@@ -60,8 +60,8 @@
 <i class="iconify tabler--dots-vertical text-xl"></i>
 </button>
 <div aria-orientation="vertical" class="hs-dropdown-menu" role="menu">
-<a class="dropdown-item" href="/#">Edit profile</a>
-<a class="dropdown-item text-danger" href="/#">Report</a>
+<a class="dropdown-item" href="#">Edit profile</a>
+<a class="dropdown-item text-danger" href="#">Report</a>
 </div>
 </div>
 </div>
@@ -108,7 +108,7 @@
 </div>
 <p class="text-sm">
                                                     Email
-                                                    <a class="text-primary font-semibold" href="/mailto:hello&#64;example.com">hello&#64;example.com</a>
+                                                    <a class="text-primary font-semibold" href="mailto:hello&#64;example.com">hello&#64;example.com</a>
 </p>
 </div>
 <div class="flex items-center gap-3">
@@ -133,20 +133,20 @@
 </div>
 </div>
 <div class="flex flex-wrap items-center md:justify-center justify-start gap-3 mt-7.5 mb-3">
-<a class="btn btn-icon bg-primary hover:bg-primary-hover rounded-full" href="/#">
+<a class="btn btn-icon bg-primary hover:bg-primary-hover rounded-full" href="#">
 <svg class="text-lg text-white" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
 </svg>
 </a>
-<a class="btn btn-icon bg-info hover:bg-info-hover rounded-full" href="/#">
+<a class="btn btn-icon bg-info hover:bg-info-hover rounded-full" href="#">
 <svg class="text-lg text-white" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
 <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
 </svg>
 </a>
-<a class="btn btn-icon bg-danger hover:bg-danger-hover rounded-full" href="/#">
+<a class="btn btn-icon bg-danger hover:bg-danger-hover rounded-full" href="#">
 <svg class="text-lg text-white" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 <path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z"></path>
@@ -154,7 +154,7 @@
 <path d="M16.5 7.5v.01"></path>
 </svg>
 </a>
-<a class="btn btn-icon bg-success hover:bg-success-hover rounded-full" href="/#">
+<a class="btn btn-icon bg-success hover:bg-success-hover rounded-full" href="#">
 <svg class="text-lg text-white" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
@@ -163,7 +163,7 @@
 <path d="M3.1 10.75c5 0 9.814 -.38 15.314 -5"></path>
 </svg>
 </a>
-<a class="btn btn-icon bg-secondary hover:bg-secondary-hover rounded-full" href="/#">
+<a class="btn btn-icon bg-secondary hover:bg-secondary-hover rounded-full" href="#">
 <svg class="text-lg text-white" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 <path d="M8 11v5"></path>
@@ -173,7 +173,7 @@
 <path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z"></path>
 </svg>
 </a>
-<a class="btn btn-icon bg-danger hover:bg-danger-hover rounded-full" href="/#">
+<a class="btn btn-icon bg-danger hover:bg-danger-hover rounded-full" href="#">
 <svg class="text-lg text-white" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 <path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8z"></path>
@@ -183,18 +183,18 @@
 </div>
 <h4 class="card-title md:mt-7.5 mt-7 mb-base">Skills</h4>
 <div class="flex flex-wrap itmes-center gap-1.5">
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">Product Design</a>
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">UI/UX</a>
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">Tailwind CSS</a>
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">Bootstrap</a>
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">React.js</a>
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">Next.js</a>
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">Vue.js</a>
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">Figma</a>
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">Design Systems</a>
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">Template Authoring</a>
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">Responsive Design</a>
-<a class="btn btn-sm bg-light hover:text-primary" href="/#">Component Libraries</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">Product Design</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">UI/UX</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">Tailwind CSS</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">Bootstrap</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">React.js</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">Next.js</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">Vue.js</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">Figma</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">Design Systems</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">Template Authoring</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">Responsive Design</a>
+<a class="btn btn-sm bg-light hover:text-primary" href="#">Component Libraries</a>
 </div>
 </div>
 </div>
@@ -331,7 +331,7 @@
 <tr class="hover:bg-default-50 transition">
 <td class="py-2 ps-4.5 pe-2">
 <h5 class="text-default-700 my-1">
-<a href="/#">Blazor Admin Theme – Final QA</a>
+<a href="#">Blazor Admin Theme – Final QA</a>
 </h5>
 <span class="text-xs text-default-400">Due in 3 days</span>
 </td>
@@ -340,7 +340,7 @@
 </td>
 <td class="p-2">
 <div class="flex items-center gap-2">
-<img alt="Jordan Walsh" class="size-8 rounded-full object-cover" src="/images/users/user-7.jpg"/>
+<img alt="Jordan Walsh" class="size-8 rounded-full object-cover" src="images/users/user-7.jpg"/>
 <div>
 <h5 class="text-nowrap">Jordan Walsh</h5>
 <p class="text-xs text-default-400">jordan&#64;uxlabs.io</p>
@@ -354,7 +354,7 @@
 <td class="p-2">60%</td>
 <td class="p-2">9h 10min</td>
 <td>
-<a href="/#">
+<a href="#">
 <i class="iconify tabler--pencil text-lg text-default-400"></i>
 </a>
 </td>
@@ -362,7 +362,7 @@
 <tr class="hover:bg-default-50 transition">
 <td class="py-2 ps-4.5 pe-2">
 <h5 class="text-default-700 my-1">
-<a href="/#">Vue 3 UI Kit Refactor</a>
+<a href="#">Vue 3 UI Kit Refactor</a>
 </h5>
 <span class="text-xs text-default-400">Due in 8 days</span>
 </td>
@@ -371,7 +371,7 @@
 </td>
 <td class="p-2">
 <div class="flex items-center gap-2">
-<img alt="Emily Foster" class="size-8 rounded-full object-cover" src="/images/users/user-8.jpg"/>
+<img alt="Emily Foster" class="size-8 rounded-full object-cover" src="images/users/user-8.jpg"/>
 <div>
 <h5 class="text-nowrap">Emily Foster</h5>
 <p class="text-xs text-default-400">emily&#64;devspark.pro</p>
@@ -385,7 +385,7 @@
 <td class="p-2">100%</td>
 <td class="p-2">27h 20min</td>
 <td>
-<a href="/#">
+<a href="#">
 <i class="iconify tabler--pencil text-lg text-default-400"></i>
 </a>
 </td>
@@ -393,7 +393,7 @@
 <tr class="hover:bg-default-50 transition">
 <td class="py-2 ps-4.5 pe-2">
 <h5 class="text-default-700 my-1">
-<a href="/#">HTML Email Templates Pack</a>
+<a href="#">HTML Email Templates Pack</a>
 </h5>
 <span class="text-xs text-default-400">Due in 1 day</span>
 </td>
@@ -402,7 +402,7 @@
 </td>
 <td class="p-2">
 <div class="flex items-center gap-2">
-<img alt="Ella Newman" class="size-8 rounded-full object-cover" src="/images/users/user-9.jpg"/>
+<img alt="Ella Newman" class="size-8 rounded-full object-cover" src="images/users/user-9.jpg"/>
 <div>
 <h5 class="text-nowrap">Ella Newman</h5>
 <p class="text-xs text-default-400">ella&#64;mailgenius.app</p>
@@ -416,7 +416,7 @@
 <td class="p-2">55%</td>
 <td class="p-2">5h 40min</td>
 <td>
-<a href="/#">
+<a href="#">
 <i class="iconify tabler--pencil text-lg text-default-400"></i>
 </a>
 </td>
@@ -424,7 +424,7 @@
 <tr class="hover:bg-default-50 transition">
 <td class="py-2 ps-4.5 pe-2">
 <h5 class="text-default-700 my-1">
-<a href="/#">Admin Migration</a>
+<a href="#">Admin Migration</a>
 </h5>
 <span class="text-xs text-default-400">Due in 6 days</span>
 </td>
@@ -433,7 +433,7 @@
 </td>
 <td class="p-2">
 <div class="flex items-center gap-2">
-<img alt="Daniel Rhodes" class="size-8 rounded-full object-cover" src="/images/users/user-10.jpg"/>
+<img alt="Daniel Rhodes" class="size-8 rounded-full object-cover" src="images/users/user-10.jpg"/>
 <div>
 <h5 class="text-nowrap">Daniel Rhodes</h5>
 <p class="text-xs text-default-400">daniel&#64;uideck.net</p>
@@ -447,7 +447,7 @@
 <td class="p-2">25%</td>
 <td class="p-2">4h 15min</td>
 <td>
-<a href="/#">
+<a href="#">
 <i class="iconify tabler--pencil text-lg text-default-400"></i>
 </a>
 </td>
@@ -455,7 +455,7 @@
 <tr class="hover:bg-default-50 transition">
 <td class="py-2 ps-4.5 pe-2">
 <h5 class="text-default-700 my-1">
-<a href="/#">SaaS Dashboard: UX Testing</a>
+<a href="#">SaaS Dashboard: UX Testing</a>
 </h5>
 <span class="text-xs text-default-400">Due in 9 days</span>
 </td>
@@ -464,7 +464,7 @@
 </td>
 <td class="p-2">
 <div class="flex items-center gap-2">
-<img alt="Leo Patterson" class="size-8 rounded-full object-cover" src="/images/users/user-2.jpg"/>
+<img alt="Leo Patterson" class="size-8 rounded-full object-cover" src="images/users/user-2.jpg"/>
 <div>
 <h5 class="text-nowrap">Leo Patterson</h5>
 <p class="text-xs text-default-400">leo&#64;uxcore.studio</p>
@@ -478,7 +478,7 @@
 <td class="p-2">20%</td>
 <td class="p-2">12h 30min</td>
 <td>
-<a href="/#">
+<a href="#">
 <i class="iconify tabler--pencil text-lg text-default-400"></i>
 </a>
 </td>
@@ -493,16 +493,16 @@
 <textarea class="form-textarea" placeholder="Write something..." rows="3"></textarea>
 <div class="flex py-3 justify-between">
 <div>
-<a class="btn size-7.5 btn-icon bg-light hover:text-primary" href="/#">
+<a class="btn size-7.5 btn-icon bg-light hover:text-primary" href="#">
 <i class="iconify tabler--user"></i>
 </a>
-<a class="btn size-7.5 btn-icon bg-light hover:text-primary" href="/#">
+<a class="btn size-7.5 btn-icon bg-light hover:text-primary" href="#">
 <i class="iconify tabler--map-pin"></i>
 </a>
-<a class="btn size-7.5 btn-icon bg-light hover:text-primary" href="/#">
+<a class="btn size-7.5 btn-icon bg-light hover:text-primary" href="#">
 <i class="iconify tabler--camera"></i>
 </a>
-<a class="btn size-7.5 btn-icon bg-light hover:text-primary" href="/#">
+<a class="btn size-7.5 btn-icon bg-light hover:text-primary" href="#">
 <i class="iconify tabler--mood-smile"></i>
 </a>
 </div>
@@ -513,7 +513,7 @@
 <!-- Story Box-->
 <div class="border border-light border-dashed rounded p-3 mb-base">
 <div class="flex items-center gap-3 mb-3">
-<img alt="Jeremy Tomlinson" class="size-9 rounded-full" src="/images/users/user-3.jpg"/>
+<img alt="Jeremy Tomlinson" class="size-9 rounded-full" src="images/users/user-3.jpg"/>
 <div class="w-full">
 <h5 class="text-sm">Jeremy Tomlinson</h5>
 <p class="text-default-400">
@@ -523,16 +523,16 @@
 </div>
 <p class="mb-4 text-sm">Story based around the idea of time lapse, animation to post soon!</p>
 <div class="flex flex-wrap items-center gap-3">
-<img alt="post-img" class="rounded h-15" src="/images/stock/small-1.jpg"/>
-<img alt="post-img" class="rounded h-15" src="/images/stock/small-2.jpg"/>
-<img alt="post-img" class="rounded h-15" src="/images/stock/small-3.jpg"/>
+<img alt="post-img" class="rounded h-15" src="images/stock/small-1.jpg"/>
+<img alt="post-img" class="rounded h-15" src="images/stock/small-2.jpg"/>
+<img alt="post-img" class="rounded h-15" src="images/stock/small-3.jpg"/>
 </div>
 <div class="mt-3">
-<a class="btn btn-sm text-default-400 text-sm" href="/javascript: void(0);">
+<a class="btn btn-sm text-default-400 text-sm" href="javascript: void(0);">
 <i class="iconify tabler--corner-up-left text-sm"></i>
                                                         Reply
                                                     </a>
-<a class="btn btn-sm text-default-400 text-sm" href="/javascript: void(0);">
+<a class="btn btn-sm text-default-400 text-sm" href="javascript: void(0);">
 <div class="relative">
 <span id="like-count-one"></span>
 <button data-hs-toggle-password='{"target": "#like-count-one" }' type="button">
@@ -547,7 +547,7 @@
 </button>
 </div>
 </a>
-<a class="btn btn-sm text-default-400 text-sm" href="/javascript: void(0);">
+<a class="btn btn-sm text-default-400 text-sm" href="javascript: void(0);">
 <i class="iconify tabler--share text-sm"></i>
                                                         Share
                                                     </a>
@@ -557,7 +557,7 @@
 <div class="border border-light border-dashed rounded p-3 mb-base">
 <!-- Top User -->
 <div class="flex items-center gap-3 mb-3">
-<img alt="avatar-4" class="size-9 rounded-full" src="/images/users/user-4.jpg"/>
+<img alt="avatar-4" class="size-9 rounded-full" src="images/users/user-4.jpg"/>
 <div class="w-full">
 <h5 class="m-0 font-semibold">Sophia Martinez</h5>
 <p class="text-default-400 text-sm">
@@ -574,20 +574,20 @@
 <div class="bg-light/15 -mx-3 p-3 border-t border-b border-dashed border-default-300">
 <!-- First Reply -->
 <div class="flex items-start gap-2">
-<img alt="avatar-1" class="size-9 rounded-full" src="/images/users/user-1.jpg"/>
+<img alt="avatar-1" class="size-9 rounded-full" src="images/users/user-1.jpg"/>
 <div class="w-full">
 <h5 class="mt-0 mb-1.25 font-semibold">
                                                                 Liam Johnson
                                                                 <small class="text-default-400 ms-1">10 minutes ago</small>
 </h5>
 <p class="text-default-600">That sounds awesome! Can't wait to see how you designed the UI.</p>
-<a class="text-default-500 text-sm inline-block mt-3" href="/#">
+<a class="text-default-500 text-sm inline-block mt-3" href="#">
 <i class="iconify tabler--corner-up-left"></i>
                                                                 Reply
                                                             </a>
 <!-- Nested Reply -->
 <div class="flex items-start gap-2 mt-5">
-<img alt="avatar-2" class="size-9 rounded-full" src="/images/users/user-2.jpg"/>
+<img alt="avatar-2" class="size-9 rounded-full" src="images/users/user-2.jpg"/>
 <div class="w-full">
 <h5 class="mb-1.25 font-semibold">
                                                                         Olivia Carter
@@ -600,7 +600,7 @@
 </div>
 <!-- Add a Comment -->
 <div class="flex items-start gap-2 mt-3">
-<img alt="avatar-3" class="size-9 rounded-full" src="/images/users/user-3.jpg"/>
+<img alt="avatar-3" class="size-9 rounded-full" src="images/users/user-3.jpg"/>
 <div class="w-full">
 <input class="form-input form-input-sm" placeholder="Add a comment..." type="text"/>
 </div>
@@ -608,7 +608,7 @@
 </div>
 <!-- Bottom Buttons -->
 <div class="mt-3 flex items-center gap-4">
-<a class="text-sm text-default-400 flex items-center gap-1" href="/#">
+<a class="text-sm text-default-400 flex items-center gap-1" href="#">
 <i class="iconify tabler--corner-up-left"></i>
                                                         Reply
                                                     </a>
@@ -627,7 +627,7 @@
                                                             </div>
 </button>
 </div>
-<a class="text-sm text-default-400 flex items-center gap-1" href="/#">
+<a class="text-sm text-default-400 flex items-center gap-1" href="#">
 <i class="iconify tabler--share"></i>
                                                         Share
                                                     </a>
@@ -636,7 +636,7 @@
 <!-- Story Box -->
 <div class="border border-light border-dashed rounded p-3 mb-base">
 <div class="flex items-center gap-3 mb-2">
-<img alt="avatar-2" class="size-9 rounded-full" src="/images/users/user-2.jpg"/>
+<img alt="avatar-2" class="size-9 rounded-full" src="images/users/user-2.jpg"/>
 <div class="w-full">
 <h5>Anika Roy</h5>
 <p class="text-default-400">
@@ -699,14 +699,14 @@
 <label class="form-label" for="useremail">Email Address</label>
 <input class="form-input" id="useremail" placeholder="Enter email" type="email"/>
 <span class="text-xs italic text-default-400">
-<a class="hover:text-primary" href="/#">Click here to change your email</a>
+<a class="hover:text-primary" href="#">Click here to change your email</a>
 </span>
 </div>
 <div>
 <label class="form-label" for="userpassword">Password</label>
 <input class="form-input" id="userpassword" placeholder="Enter new password" type="password"/>
 <span class="text-xs italic text-default-400">
-<a class="hover:text-primary" href="/#">Click here to change your email</a>
+<a class="hover:text-primary" href="#">Click here to change your email</a>
 </span>
 </div>
 <div class="lg:col-span-2 col-span-1">

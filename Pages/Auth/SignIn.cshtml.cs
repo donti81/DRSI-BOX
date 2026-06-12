@@ -46,7 +46,7 @@ namespace DRSIBOX.Pages.Auth
                 Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
 
             if (result.Succeeded)
-                return LocalRedirect(returnUrl ?? "/");
+                return string.IsNullOrEmpty(returnUrl) ? RedirectToPage("/Index") : LocalRedirect(returnUrl);
 
             ErrorMessage = "Invalid email or password.";
             return Page();

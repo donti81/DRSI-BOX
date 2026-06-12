@@ -1,4 +1,4 @@
-@page "/apps/users/roles"
+﻿@page "/apps/users/roles"
 @model Paces.Pages.Apps.Users.RolesModel
 
 
@@ -44,7 +44,7 @@
 {
 <div class="card">
 <div class="absolute end-0 top-0 size-45">
-<img alt="auth-card-bg" src="/images/auth-card-bg.svg"/>
+<img alt="auth-card-bg" src="images/auth-card-bg.svg"/>
 </div>
 <div class="card-body">
 <div class="mb-7.5 flex items-start">
@@ -65,7 +65,7 @@
 @role.UserCount uporabnikov
 </span>
 <div>
-<a class="btn btn-sm border-primary text-primary hover:bg-primary rounded-full border hover:text-white" href="/apps/users/role-details?role=@role.Name">Details</a>
+<a class="btn btn-sm border-primary text-primary hover:bg-primary rounded-full border hover:text-white" href="apps/users/role-details?role=@role.Name">Details</a>
 </div>
 </div>
 </div>
@@ -140,14 +140,14 @@
 var role = Model.UserRoles.TryGetValue(user.Id, out var r) ? r : "";
 <tr>
 <td><input class="form-checkbox form-checkbox-light size-4.5" type="checkbox" value="option"/></td>
-<td><h5><a class="hover:text-primary" href="/#">@user.Id[..8].ToUpper()</a></h5></td>
+<td><h5><a class="hover:text-primary" href="#">@user.Id[..8].ToUpper()</a></h5></td>
 <td>
 <div class="flex items-center gap-3">
 <div class="bg-primary/15 text-primary flex size-8 items-center justify-center rounded-full text-xs font-bold">
 @((user.FullName ?? user.Email ?? "?")[..1].ToUpper())
 </div>
 <div>
-<h5><a class="hover:text-primary" data-sort="user" href="/#!">@(user.FullName ?? user.Email)</a></h5>
+<h5><a class="hover:text-primary" data-sort="user" href="#!">@(user.FullName ?? user.Email)</a></h5>
 <p class="text-default-400 text-xs">@user.Email</p>
 </div>
 </div>
@@ -259,7 +259,7 @@ var role = Model.UserRoles.TryGetValue(user.Id, out var r) ? r : "";
 
 
 @section Scripts {
-<script src="/js/pages/custom-table.js"></script>
+<script src="js/pages/custom-table.js"></script>
 <script>
 function setAssignRole(userId, currentRole) {
     document.getElementById('assignUserId').value = userId;

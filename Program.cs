@@ -59,6 +59,7 @@ builder.Services.AddScoped<IDownloadLogService, DownloadLogService>();
 builder.Services.AddScoped<IUploadNotificationService, UploadNotificationService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IDownloadTokenService, DownloadTokenService>();
+builder.Services.AddSingleton<IUploadPathResolver, UploadPathResolver>();
 
 var app = builder.Build();
 
@@ -137,6 +138,10 @@ await using (var scope = app.Services.CreateAsyncScope())
     }
 }
 
+var pathBase = app.Configuration.GetValue<string>("PathBase");
+if (!string.IsNullOrWhiteSpace(pathBase))
+    app.UsePathBase(pathBase);
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
@@ -149,14 +154,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 var tusDiskStorePath = Path.Combine(app.Environment.ContentRootPath, "tus-store");
-var uploadsPath = Path.Combine(app.Environment.WebRootPath, "uploads");
+var uploadsPath = app.Services.GetRequiredService<IUploadPathResolver>().Root;
 Directory.CreateDirectory(tusDiskStorePath);
-Directory.CreateDirectory(uploadsPath);
 
-app.UseTus(httpContext => new DefaultTusConfiguration
+app.MapStaticAssets();
+app.MapRazorPages().WithStaticAssets();
+
+app.MapTus("/tus", async httpContext => new DefaultTusConfiguration
 {
     Store = new TusDiskStore(tusDiskStorePath),
-    UrlPath = "/tus",
     MaxAllowedUploadSizeInBytesLong = null,
     Events = new Events
     {
@@ -203,9 +209,6 @@ app.UseTus(httpContext => new DefaultTusConfiguration
             });
         }
     }
-});
-
-app.MapStaticAssets();
-app.MapRazorPages().WithStaticAssets();
+}).RequireAuthorization();
 
 app.Run();

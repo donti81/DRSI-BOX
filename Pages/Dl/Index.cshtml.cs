@@ -14,7 +14,7 @@ namespace DRSIBOX.Pages.Dl
         private readonly IDownloadTokenService _tokens;
         private readonly IUploadNotificationService _notifications;
         private readonly IUploadLogService _uploadLog;
-        private readonly IWebHostEnvironment _env;
+        private readonly IUploadPathResolver _uploadPaths;
 
         public string? ErrorMessage { get; private set; }
 
@@ -22,12 +22,12 @@ namespace DRSIBOX.Pages.Dl
             IDownloadTokenService tokens,
             IUploadNotificationService notifications,
             IUploadLogService uploadLog,
-            IWebHostEnvironment env)
+            IUploadPathResolver uploadPaths)
         {
             _tokens = tokens;
             _notifications = notifications;
             _uploadLog = uploadLog;
-            _env = env;
+            _uploadPaths = uploadPaths;
         }
 
         public async Task<IActionResult> OnGetAsync(string token)
@@ -90,9 +90,6 @@ namespace DRSIBOX.Pages.Dl
             return File(ms, "application/zip", $"dokumenti-{dt.NotifId}.zip");
         }
 
-        private string ResolveFilePath(UploadLog file) =>
-            string.IsNullOrEmpty(file.Folder)
-                ? Path.Combine(_env.WebRootPath, "uploads", file.FileName)
-                : Path.Combine(_env.WebRootPath, "uploads", file.Folder, file.FileName);
+        private string ResolveFilePath(UploadLog file) => _uploadPaths.Resolve(file);
     }
 }

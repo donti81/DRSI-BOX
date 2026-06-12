@@ -9,7 +9,7 @@ namespace DRSIBOX.Pages.Form
 {
     public class FileuploadsModel : PageModel
     {
-        private readonly IWebHostEnvironment _env;
+        private readonly IUploadPathResolver _uploadPaths;
         private readonly IUploadLogService _uploadLog;
         private readonly IUploadNotificationService _notifications;
         private readonly IEmailService _email;
@@ -20,9 +20,9 @@ namespace DRSIBOX.Pages.Form
         public bool IsDrsi { get; private set; }
         public string PersonalFolder { get; private set; } = "";
 
-        public FileuploadsModel(IWebHostEnvironment env, IUploadLogService uploadLog, IUploadNotificationService notifications, IEmailService email, UserManager<ApplicationUser> userManager, IDownloadTokenService tokens, IConfiguration config)
+        public FileuploadsModel(IUploadPathResolver uploadPaths, IUploadLogService uploadLog, IUploadNotificationService notifications, IEmailService email, UserManager<ApplicationUser> userManager, IDownloadTokenService tokens, IConfiguration config)
         {
-            _env = env;
+            _uploadPaths = uploadPaths;
             _uploadLog = uploadLog;
             _notifications = notifications;
             _email = email;
@@ -52,7 +52,7 @@ namespace DRSIBOX.Pages.Form
             else if (string.IsNullOrWhiteSpace(folder) || folder.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
                 return new JsonResult(new { success = false, error = "Izberite veljavno občino." });
 
-            var uploadsRoot = Path.Combine(_env.WebRootPath, "uploads");
+            var uploadsRoot = _uploadPaths.Root;
             var uploadsDir  = Path.GetFullPath(Path.Combine(uploadsRoot, folder));
 
             if (!uploadsDir.StartsWith(uploadsRoot, StringComparison.OrdinalIgnoreCase))
